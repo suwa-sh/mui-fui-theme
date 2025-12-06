@@ -1,0 +1,10 @@
+{
+  "name": "mui-fui-theme-monorepo",
+  "private": true,
+  "scripts": {
+    "build": "pnpm --filter @suwa-sh/mui-fui-theme build",
+    "storybook": "pnpm --filter @suwa-sh/mui-fui-theme storybook",
+    "build-storybook": "pnpm --filter @suwa-sh/mui-fui-theme build-storybook"
+  },
+  "devDependencies": {}
+}

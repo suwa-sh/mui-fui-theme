@@ -1,0 +1,161 @@
+{/* ColorGuidelines.mdx */}
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Docs/Color Guidelines" />
+
+# カラーガイドライン
+
+FUI Theme のカラーシステムについて解説します。
+
+## テーマカラー
+
+### アクセントカラー
+
+メインのアクセントカラーはアンバー（#FFB300）です。これはUIの主要な要素やハイライトに使用されます。
+
+| カラー | ダークモード | ライトモード |
+|--------|------------|------------|
+| Primary | #FFB300 | #FF8F00 |
+| Text Accent | #FFB300 | #FF8F00 |
+
+### テキストカラー
+
+| 用途 | ダークモード | ライトモード |
+|------|------------|------------|
+| Primary Text | rgba(255, 255, 255, 0.87) | rgba(0, 0, 0, 0.87) |
+| Secondary Text | rgba(255, 255, 255, 0.6) | rgba(0, 0, 0, 0.6) |
+| Disabled Text | rgba(255, 255, 255, 0.38) | rgba(0, 0, 0, 0.38) |
+| Accent Text | #FFB300 | #FF8F00 |
+
+### 背景カラー
+
+| 用途 | ダークモード | ライトモード |
+|------|------------|------------|
+| Default | #0A0A0A | #FAFAFA |
+| Paper | #141414 | #FFFFFF |
+| Surface | #1A1A1A | #F5F5F5 |
+
+### ステータスカラー
+
+| ステータス | ダークモード | ライトモード |
+|----------|------------|------------|
+| Success | #00C853 | #00C853 |
+| Warning | #FFD600 | #FFD600 |
+| Error | #FF1744 | #FF1744 |
+| Info | #29B6F6 | #29B6F6 |
+
+## ステージカラー
+
+ワークフローの進行状況を表現するための色相環ベースの12段階カラーです。
+
+### ダークモード
+
+| ステージ | 色相 | カラーコード | 用途 |
+|---------|------|-------------|------|
+| stage1 | 0° | #FF5252 (レッド) | 最初の段階 |
+| stage2 | 30° | #FF9800 (オレンジ) | 2番目の段階 |
+| stage3 | 60° | #FFEB3B (イエロー) | 3番目の段階 |
+| stage4 | 90° | #CDDC39 (ライム) | 4番目の段階 |
+| stage5 | 120° | #4CAF50 (グリーン) | 5番目の段階 |
+| stage6 | 150° | #009688 (ティール) | 6番目の段階 |
+| stage7 | 180° | #00BCD4 (シアン) | 7番目の段階 |
+| stage8 | 210° | #03A9F4 (ライトブルー) | 8番目の段階 |
+| stage9 | 240° | #3F51B5 (インディゴ) | 9番目の段階 |
+| stage10 | 270° | #9C27B0 (パープル) | 10番目の段階 |
+| stage11 | 300° | #E91E63 (ピンク) | 11番目の段階 |
+| stage12 | 330° | #F44336 (ディープレッド) | 12番目の段階 |
+
+### ライトモード
+
+ライトモードでは、視認性を確保するために彩度と明度が調整されています。
+
+## 使用方法
+
+### getColors() の使用
+
+```tsx
+import { getColors, type ThemeMode } from '@suwa-sh/mui-fui-theme';
+
+function MyComponent() {
+  const theme = useTheme();
+  const mode = theme.palette.mode as ThemeMode;
+  const colors = getColors(mode);
+
+  return (
+    <Box sx={{ color: colors.primary }}>
+      Primary colored text
+    </Box>
+  );
+}
+```
+
+### getStageColors() の使用
+
+```tsx
+import { getStageColors, type ThemeMode } from '@suwa-sh/mui-fui-theme';
+
+function WorkflowStep({ stage }: { stage: number }) {
+  const theme = useTheme();
+  const mode = theme.palette.mode as ThemeMode;
+  const stageColors = getStageColors(mode);
+
+  // stage1 ~ stage12 まで対応
+  const stageKey = `stage${stage}` as keyof typeof stageColors;
+  const color = stageColors[stageKey];
+
+  return (
+    <Box sx={{ borderColor: color }}>
+      Step {stage}
+    </Box>
+  );
+}
+```
+
+### getThemeColors() の使用
+
+```tsx
+import { getThemeColors, type ThemeMode } from '@suwa-sh/mui-fui-theme';
+
+function Sidebar() {
+  const theme = useTheme();
+  const mode = theme.palette.mode as ThemeMode;
+  const themeColors = getThemeColors(mode);
+
+  return (
+    <Box
+      sx={{
+        backgroundColor: themeColors.background.default,
+        borderColor: themeColors.border,
+        color: themeColors.text.primary,
+      }}
+    >
+      Sidebar content
+    </Box>
+  );
+}
+```
+
+## カラーのアクセシビリティ
+
+### コントラスト比
+
+FUI Theme のカラーは、WCAG 2.1 Level AA のコントラスト比要件を意識して設計されていますが、a11y（アクセシビリティ）よりもデザインの方向性を優先しています。
+
+> **注意**: 本テーマはa11y基準を厳密に満たしていない場合があります。視覚的なデザインを優先しているため、アクセシビリティが重要なプロジェクトでは追加の調整が必要になる場合があります。
+
+### カラーブラインドへの配慮
+
+ステージカラーは、色覚多様性を考慮して選定されていますが、色だけに依存せず、アイコンやラベルと組み合わせて使用することを推奨します。
+
+```tsx
+// 推奨: 色 + アイコン + ラベル
+<Chip
+  icon={<CheckCircle />}
+  label="Completed"
+  sx={{ color: stageColors.stage5 }}
+/>
+```
+
+## カラーパレットの確認
+
+実際のカラーパレットは [Foundations/Colors](/?path=/story/foundations-colors--color-palette) で確認できます。

@@ -1,0 +1,154 @@
+{/* DesignPrinciples.mdx */}
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Docs/Design Principles" />
+
+# デザイン原則
+
+FUI Theme のデザインは、以下の原則に基づいています。
+
+## 1. シャープなエッジ
+
+従来のMaterial Designの角丸を排除し、直線的でシャープなデザインを採用しています。
+
+```tsx
+// すべてのコンポーネントで borderRadius: 0 を適用
+const theme = createTheme({
+  shape: {
+    borderRadius: 0,
+  },
+});
+```
+
+### 適用箇所
+
+- ボタン
+- カード
+- テキストフィールド
+- ダイアログ
+- すべてのPaperコンポーネント
+
+## 2. グローエフェクト
+
+ダークモードでは、要素に光るエフェクトを適用し、未来的な雰囲気を演出します。
+
+```tsx
+import { getGlowEffects } from '@suwa-sh/mui-fui-theme';
+
+const glowEffects = getGlowEffects('dark');
+
+// 3段階の強度
+glowEffects.soft    // 控えめな光
+glowEffects.medium  // 中程度の光
+glowEffects.strong  // 強い光
+glowEffects.text    // テキスト用の光
+```
+
+### 使用例
+
+```tsx
+<Button
+  sx={{
+    boxShadow: glowEffects.soft,
+    '&:hover': {
+      boxShadow: glowEffects.medium,
+    },
+  }}
+>
+  Glowing Button
+</Button>
+```
+
+> **注意**: ライトモードではグローエフェクトは無効化され、クリーンな見た目を維持します。
+
+## 3. モノスペースフォント
+
+技術的な雰囲気を出すため、JetBrains Mono フォントを採用しています。
+
+```tsx
+// テーマ設定
+typography: {
+  fontFamily: '"JetBrains Mono", "Roboto Mono", monospace',
+}
+```
+
+### タイポグラフィ階層
+
+- **h1-h6**: 見出し用、大きめのフォントサイズ
+- **body1/body2**: 本文用
+- **caption**: 小さいテキスト、大文字変換
+- **overline**: ラベル用、大文字・スペーシング
+
+## 4. ステージカラー
+
+ワークフローの進行を表現する色相環ベースの12段階カラースキームを採用しています。
+
+| ステージ | 色相 | ダークモード | ライトモード |
+|---------|------|------------|------------|
+| stage1 | 0° | レッド | ディープレッド |
+| stage2 | 30° | オレンジ | ディープオレンジ |
+| stage3 | 60° | イエロー | ディープイエロー |
+| stage4 | 90° | ライム | ディープライム |
+| stage5 | 120° | グリーン | ディープグリーン |
+| stage6 | 150° | ティール | ディープティール |
+| ... | ... | ... | ... |
+
+```tsx
+import { getStageColors } from '@suwa-sh/mui-fui-theme';
+
+const stageColors = getStageColors('dark');
+
+stageColors.stage1   // 第1段階の色
+stageColors.stage2   // 第2段階の色
+// ...stage12まで対応
+```
+
+## 5. 大文字・スペーシング
+
+ラベルやヘッダーでは、大文字変換と文字間隔の調整を行い、技術的な雰囲気を強調します。
+
+```tsx
+<Typography
+  sx={{
+    textTransform: 'uppercase',
+    letterSpacing: '0.1em',
+  }}
+>
+  SYSTEM STATUS
+</Typography>
+```
+
+## 6. 境界線とグリッド
+
+要素間の境界を明確にし、グリッド背景でテクニカルな雰囲気を演出します。
+
+```tsx
+// グリッド背景の例
+<Box
+  sx={{
+    backgroundImage: `
+      linear-gradient(rgba(255, 179, 0, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 179, 0, 0.03) 1px, transparent 1px)
+    `,
+    backgroundSize: '20px 20px',
+  }}
+>
+  {/* コンテンツ */}
+</Box>
+```
+
+## デザインのDo's and Don'ts
+
+### Do's ✓
+
+- シャープなエッジを維持する
+- ダークモードではグローエフェクトを活用する
+- ステージカラーを使ってワークフローを表現する
+- 大文字・スペーシングでラベルを強調する
+
+### Don'ts ✗
+
+- 角丸（borderRadius > 0）を使用しない
+- ライトモードでグローエフェクトを使用しない
+- 過度な装飾を避ける
+- 標準のMaterial Designアイコンスタイルを変更しない
