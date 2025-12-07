@@ -5,6 +5,9 @@ Futuristic User Interface (FUI/HUD) theme for MUI and CodeMirror - J.A.R.V.I.S. 
 [![npm version](https://badge.fury.io/js/@suwa-sh%2Fmui-fui-theme.svg)](https://www.npmjs.com/package/@suwa-sh/mui-fui-theme)
 [![Storybook](https://img.shields.io/badge/Storybook-ff4785?logo=storybook&logoColor=white)](https://suwa-sh.github.io/mui-fui-theme)
 
+![hero image dark](https://share.cleanshot.com/TDMlpCgM+)
+![hero image light](https://share.cleanshot.com/g6fqTwXC+)
+
 ## Features
 
 - Dark and Light mode themes
