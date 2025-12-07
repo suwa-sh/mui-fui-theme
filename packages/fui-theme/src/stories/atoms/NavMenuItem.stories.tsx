@@ -25,7 +25,6 @@ const DefaultDemo: React.FC = () => {
   const theme = useTheme();
   const mode = theme.palette.mode as ThemeMode;
   const themeColors = getThemeColors(mode);
-  const stageColors = getStageColors(mode);
 
   return (
     <Box sx={{ width: 260, bgcolor: themeColors.background.default, p: 1 }}>

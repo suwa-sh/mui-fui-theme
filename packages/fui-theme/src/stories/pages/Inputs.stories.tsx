@@ -33,9 +33,6 @@ export default meta;
 
 // Select Story
 const SelectDemo: React.FC = () => {
-  const theme = useTheme();
-  const mode = theme.palette.mode as ThemeMode;
-  const colors = getColors(mode);
   const [value, setValue] = React.useState('');
   const [multiValue, setMultiValue] = React.useState<string[]>([]);
 

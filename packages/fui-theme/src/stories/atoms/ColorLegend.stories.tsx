@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Box, useTheme } from '@mui/material';
+import { useTheme } from '@mui/material';
 import { ColorLegend, type ColorLegendItem } from '../../components/atoms/ColorLegend';
 import { getStageColors, type ThemeMode } from '../../theme';
 

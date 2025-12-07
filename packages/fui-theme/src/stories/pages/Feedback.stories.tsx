@@ -26,7 +26,7 @@ import {
   Delete,
   Save,
 } from '@mui/icons-material';
-import { getColors, getGlowEffects, type ThemeMode } from '../../theme';
+import { getColors, type ThemeMode } from '../../theme';
 
 const meta: Meta = {
   title: 'Pages/Feedback',
@@ -245,10 +245,6 @@ export const DialogShowcase: StoryObj = {
 
 // Skeleton Story
 const SkeletonDemo: React.FC = () => {
-  const theme = useTheme();
-  const mode = theme.palette.mode as ThemeMode;
-  const colors = getColors(mode);
-
   return (
     <Stack spacing={4}>
       <Typography variant="h5">Skeleton</Typography>

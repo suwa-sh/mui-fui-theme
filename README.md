@@ -85,7 +85,7 @@ Available CSS keyframe animations:
 
 ## Pro Version
 
-Need more components? Check out [@suwa-sh/mui-fui-theme-pro](https://www.npmjs.com/package/@suwa-sh/mui-fui-theme-pro) for:
+Need more components? Check out **@suwa-sh/mui-fui-theme-pro** (coming soon) for:
 
 ### Navigation
 
@@ -107,7 +107,7 @@ Need more components? Check out [@suwa-sh/mui-fui-theme-pro](https://www.npmjs.c
 - `FuiBarChart` - Bar chart with FUI styling
 - `FuiRadarChart` - Radar chart with FUI styling
 
-[View Pro Documentation](https://suwa-sh.github.io/mui-fui-theme-pro)
+<!-- Pro documentation link will be added when available -->
 
 ## Development Console Logs
 

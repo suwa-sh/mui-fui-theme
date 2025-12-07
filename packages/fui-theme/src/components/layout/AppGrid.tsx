@@ -22,7 +22,7 @@ import { forwardRef } from 'react';
  *   <AppGrid size="grow">残り幅を埋める</AppGrid>
  * </AppGrid>
  */
-export interface AppGridProps extends Grid2Props {}
+export type AppGridProps = Grid2Props;
 
 export const AppGrid = forwardRef<HTMLDivElement, AppGridProps>(
   function AppGrid(props, ref) {

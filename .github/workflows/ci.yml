@@ -23,5 +23,8 @@ jobs:
 
       - run: pnpm install
 
+      - name: Lint
+        run: pnpm --filter @suwa-sh/mui-fui-theme lint
+
       - name: Build
         run: pnpm --filter @suwa-sh/mui-fui-theme build

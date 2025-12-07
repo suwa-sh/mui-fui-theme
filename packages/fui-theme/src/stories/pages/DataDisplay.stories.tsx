@@ -30,7 +30,7 @@ import {
   Error as ErrorIcon,
   Warning,
 } from '@mui/icons-material';
-import { getColors, getGlowEffects, type ThemeMode } from '../../theme';
+import { getColors, type ThemeMode } from '../../theme';
 
 const meta: Meta = {
   title: 'Pages/Data Display',
@@ -63,7 +63,6 @@ const TableDemo: React.FC = () => {
   const theme = useTheme();
   const mode = theme.palette.mode as ThemeMode;
   const colors = getColors(mode);
-  const glowEffects = getGlowEffects(mode);
 
   const getStatusColor = (status: string) => {
     switch (status) {
