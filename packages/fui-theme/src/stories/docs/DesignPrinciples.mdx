@@ -15,18 +15,19 @@ FUI Theme のデザインは、以下の原則に基づいています。
 // すべてのコンポーネントで borderRadius: 0 を適用
 const theme = createTheme({
   shape: {
-    borderRadius: 0,
+    borderRadius: 2, // 最小限の丸み
   },
 });
 ```
 
 ### 適用箇所
 
-- ボタン
+- ボタン（borderRadius: 0）
 - カード
 - テキストフィールド
 - ダイアログ
 - すべてのPaperコンポーネント
+- Chip、Slider、Progress
 
 ## 2. グローエフェクト
 
@@ -63,44 +64,83 @@ glowEffects.text    // テキスト用の光
 
 ## 3. モノスペースフォント
 
-技術的な雰囲気を出すため、JetBrains Mono フォントを採用しています。
+技術的な雰囲気を出すため、JetBrains Mono + Noto Sans JP フォントを採用しています。
 
 ```tsx
 // テーマ設定
 typography: {
-  fontFamily: '"JetBrains Mono", "Roboto Mono", monospace',
+  fontFamily: '"JetBrains Mono", "Noto Sans JP", monospace',
 }
 ```
 
 ### タイポグラフィ階層
 
-- **h1-h6**: 見出し用、大きめのフォントサイズ
-- **body1/body2**: 本文用
-- **caption**: 小さいテキスト、大文字変換
-- **overline**: ラベル用、大文字・スペーシング
+| バリアント | スタイル |
+|-----------|---------|
+| h1-h2 | textTransform: uppercase, 広めのletterSpacing |
+| h3-h6 | fontWeight: 500, letterSpacing調整 |
+| body1/body2 | lineHeight: 1.5-1.6 |
+| button | uppercase, letterSpacing: 0.08em |
+| caption | uppercase, letterSpacing: 0.05em |
+| overline | uppercase, letterSpacing: 0.15em |
 
-## 4. ステージカラー
+## 4. ステージカラー（13段階）
 
-ワークフローの進行を表現する色相環ベースの12段階カラースキームを採用しています。
+ワークフローの進行を表現する13段階カラースキームを採用しています。
 
-| ステージ | 色相 | ダークモード | ライトモード |
-|---------|------|------------|------------|
-| stage1 | 0° | レッド | ディープレッド |
-| stage2 | 30° | オレンジ | ディープオレンジ |
-| stage3 | 60° | イエロー | ディープイエロー |
-| stage4 | 90° | ライム | ディープライム |
-| stage5 | 120° | グリーン | ディープグリーン |
-| stage6 | 150° | ティール | ディープティール |
-| ... | ... | ... | ... |
+### カラー構造
+
+- **stage1-4**: テーマカラーのグラデーション（ダーク: Amber系、ライト: Blue系）
+- **stage4→13→1**: 色相環を形成（Deep Orange → Red → Purple → Blue → Cyan → Green → stage1に戻る）
+
+### ダークモード
+
+| ステージ | カラー | 説明 |
+|---------|--------|------|
+| stage1 | #FFB300 | Amber（メイン） |
+| stage2 | #FFA000 | Dark Amber |
+| stage3 | #FF8F00 | Orange Amber |
+| stage4 | #FF6F00 | Deep Orange（色相環起点） |
+| stage5 | #FF5252 | Red（赤） |
+| stage6 | #FF4081 | Pink（赤紫） |
+| stage7 | #E040FB | Purple（紫） |
+| stage8 | #651FFF | Deep Purple（青紫） |
+| stage9 | #3D5AFE | Indigo（藍） |
+| stage10 | #2979FF | Blue（青） |
+| stage11 | #00E5FF | Cyan（青緑） |
+| stage12 | #1DE9B6 | Teal（緑青） |
+| stage13 | #4CAF50 | Green（緑）→ stage1へ |
+
+### ライトモード
+
+| ステージ | カラー | 説明 |
+|---------|--------|------|
+| stage1 | #1976D2 | Blue（メイン） |
+| stage2 | #1565C0 | Dark Blue |
+| stage3 | #0D47A1 | Darker Blue |
+| stage4 | #0A3D91 | Navy（色相環起点） |
+| stage5 | #8E24AA | Purple |
+| stage6 | #D81B60 | Pink |
+| stage7 | #FF5252 | Red |
+| stage8 | #FF6F00 | Deep Orange |
+| stage9 | #FF9800 | Orange |
+| stage10 | #FFB300 | Amber |
+| stage11 | #C0CA33 | Lime |
+| stage12 | #4CAF50 | Green |
+| stage13 | #00897B | Teal → stage1へ |
 
 ```tsx
 import { getStageColors } from '@suwa-sh/mui-fui-theme';
 
 const stageColors = getStageColors('dark');
 
-stageColors.stage1   // 第1段階の色
-stageColors.stage2   // 第2段階の色
-// ...stage12まで対応
+// グラデーション部分
+stageColors.stage1   // #FFB300 Amber
+stageColors.stage4   // #FF6F00 Deep Orange（色相環起点）
+
+// 色相環部分（stage4→13→1で一周）
+stageColors.stage5   // #FF5252 Red
+stageColors.stage13  // #4CAF50 Green（stage1に戻る）
 ```
 
 ## 5. 大文字・スペーシング
@@ -123,32 +163,68 @@ stageColors.stage2   // 第2段階の色
 要素間の境界を明確にし、グリッド背景でテクニカルな雰囲気を演出します。
 
 ```tsx
-// グリッド背景の例
-<Box
-  sx={{
-    backgroundImage: `
-      linear-gradient(rgba(255, 179, 0, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 179, 0, 0.03) 1px, transparent 1px)
-    `,
-    backgroundSize: '20px 20px',
-  }}
->
-  {/* コンテンツ */}
-</Box>
+// グリッド背景（CssBaselineに自動適用）
+body: {
+  backgroundImage: `
+    linear-gradient(rgba(255, 179, 0, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 179, 0, 0.02) 1px, transparent 1px)
+  `,
+  backgroundSize: '50px 50px',
+  backgroundAttachment: 'fixed',
+}
+```
+
+### 境界線カラー
+
+```tsx
+const colors = getColors('dark');
+
+colors.border       // 'rgba(255, 179, 0, 0.2)'
+colors.borderBright // 'rgba(255, 179, 0, 0.4)'
+```
+
+## 7. コーナーデコレーション
+
+Paper/Cardコンポーネントには、左上にL字型のデコレーションが自動適用されます。
+
+```tsx
+// Paper/Cardの ::before, ::after 擬似要素
+'&::before': {
+  width: '20px',
+  height: '1px',
+  backgroundColor: colors.primary,
+},
+'&::after': {
+  width: '1px',
+  height: '20px',
+  backgroundColor: colors.primary,
+}
+```
+
+## 8. 背景の4層構造
+
+```tsx
+const colors = getColors('dark');
+
+colors.background.default   // #000000 - 最背面
+colors.background.paper     // #0a0a0a - カード/ペーパー
+colors.background.elevated  // #111111 - 浮き上がった要素
+colors.background.input     // rgba(0, 0, 0, 0.3) - 入力フィールド
 ```
 
 ## デザインのDo's and Don'ts
 
-### Do's ✓
+### Do's
 
 - シャープなエッジを維持する
 - ダークモードではグローエフェクトを活用する
 - ステージカラーを使ってワークフローを表現する
 - 大文字・スペーシングでラベルを強調する
+- コーナーデコレーションを活用する
 
-### Don'ts ✗
+### Don'ts
 
-- 角丸（borderRadius > 0）を使用しない
-- ライトモードでグローエフェクトを使用しない
+- 大きな角丸（borderRadius > 4）を使用しない
+- ライトモードでグローエフェクトを使用しない（自動でnoneになる）
 - 過度な装飾を避ける
-- 標準のMaterial Designアイコンスタイルを変更しない
+- ステージカラー以外の不規則な色を多用しない

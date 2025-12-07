@@ -7,67 +7,104 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 FUI Theme のカラーシステムについて解説します。
 
-## テーマカラー
+## プライマリカラー
 
-### アクセントカラー
+メインのアクセントカラーはモードによって異なります。
 
-メインのアクセントカラーはアンバー（#FFB300）です。これはUIの主要な要素やハイライトに使用されます。
+| モード | Primary | Secondary |
+|--------|---------|-----------|
+| Dark | #FFB300 (Amber) | #FF8F00 |
+| Light | #1976D2 (Blue) | #0D47A1 |
 
-| カラー | ダークモード | ライトモード |
-|--------|------------|------------|
-| Primary | #FFB300 | #FF8F00 |
-| Text Accent | #FFB300 | #FF8F00 |
-
-### テキストカラー
+## テキストカラー
 
 | 用途 | ダークモード | ライトモード |
 |------|------------|------------|
-| Primary Text | rgba(255, 255, 255, 0.87) | rgba(0, 0, 0, 0.87) |
-| Secondary Text | rgba(255, 255, 255, 0.6) | rgba(0, 0, 0, 0.6) |
-| Disabled Text | rgba(255, 255, 255, 0.38) | rgba(0, 0, 0, 0.38) |
-| Accent Text | #FFB300 | #FF8F00 |
+| Primary | #ffffff | #1a1a1a |
+| Secondary | rgba(255, 255, 255, 0.7) | rgba(0, 0, 0, 0.65) |
+| Disabled | rgba(255, 255, 255, 0.4) | rgba(0, 0, 0, 0.45) |
+| Accent | #FFB300 | #1565C0 |
 
-### 背景カラー
+## 背景カラー（4層構造）
 
 | 用途 | ダークモード | ライトモード |
 |------|------------|------------|
-| Default | #0A0A0A | #FAFAFA |
-| Paper | #141414 | #FFFFFF |
-| Surface | #1A1A1A | #F5F5F5 |
+| Default | #000000 | #f5f5f0 |
+| Paper | #0a0a0a | #ffffff |
+| Elevated | #111111 | #fafafa |
+| Input | rgba(0, 0, 0, 0.3) | rgba(245, 244, 240, 0.85) |
 
-### ステータスカラー
+## 境界線カラー
 
-| ステータス | ダークモード | ライトモード |
-|----------|------------|------------|
-| Success | #00C853 | #00C853 |
-| Warning | #FFD600 | #FFD600 |
-| Error | #FF1744 | #FF1744 |
-| Info | #29B6F6 | #29B6F6 |
+| 用途 | ダークモード | ライトモード |
+|------|------------|------------|
+| Border | rgba(255, 179, 0, 0.2) | rgba(21, 101, 192, 0.25) |
+| Border Bright | rgba(255, 179, 0, 0.4) | rgba(21, 101, 192, 0.5) |
 
-## ステージカラー
+## ステータスカラー
 
-ワークフローの進行状況を表現するための色相環ベースの12段階カラーです。
+| ステータス | カラーコード |
+|----------|------------|
+| Success | #4CAF50 |
+| Error | #FF5252 |
+| Warning | #FF6D00 (dark) / #FF9800 (light) |
+| Info | #FFB300 (dark) / #1565C0 (light) |
+
+## ステージカラー（13段階）
+
+ワークフローの進行状況を表現するための13段階カラーです。
+
+### カラー構造
+
+- **stage1-4**: テーマカラーのグラデーション
+- **stage4→13→1**: 色相環を形成（stage13からstage1に戻って一周）
 
 ### ダークモード
 
-| ステージ | 色相 | カラーコード | 用途 |
-|---------|------|-------------|------|
-| stage1 | 0° | #FF5252 (レッド) | 最初の段階 |
-| stage2 | 30° | #FF9800 (オレンジ) | 2番目の段階 |
-| stage3 | 60° | #FFEB3B (イエロー) | 3番目の段階 |
-| stage4 | 90° | #CDDC39 (ライム) | 4番目の段階 |
-| stage5 | 120° | #4CAF50 (グリーン) | 5番目の段階 |
-| stage6 | 150° | #009688 (ティール) | 6番目の段階 |
-| stage7 | 180° | #00BCD4 (シアン) | 7番目の段階 |
-| stage8 | 210° | #03A9F4 (ライトブルー) | 8番目の段階 |
-| stage9 | 240° | #3F51B5 (インディゴ) | 9番目の段階 |
-| stage10 | 270° | #9C27B0 (パープル) | 10番目の段階 |
-| stage11 | 300° | #E91E63 (ピンク) | 11番目の段階 |
-| stage12 | 330° | #F44336 (ディープレッド) | 12番目の段階 |
+| ステージ | カラー | 説明 |
+|---------|--------|------|
+| stage1 | #FFB300 | Amber（メイン） |
+| stage2 | #FFA000 | Dark Amber |
+| stage3 | #FF8F00 | Orange Amber |
+| stage4 | #FF6F00 | Deep Orange（色相環起点） |
+| stage5 | #FF5252 | Red（赤） |
+| stage6 | #FF4081 | Pink（赤紫） |
+| stage7 | #E040FB | Purple（紫） |
+| stage8 | #651FFF | Deep Purple（青紫） |
+| stage9 | #3D5AFE | Indigo（藍） |
+| stage10 | #2979FF | Blue（青） |
+| stage11 | #00E5FF | Cyan（青緑） |
+| stage12 | #1DE9B6 | Teal（緑青） |
+| stage13 | #4CAF50 | Green（緑）→ stage1へ |
 
 ### ライトモード
 
-ライトモードでは、視認性を確保するために彩度と明度が調整されています。
+| ステージ | カラー | 説明 |
+|---------|--------|------|
+| stage1 | #1976D2 | Blue（メイン） |
+| stage2 | #1565C0 | Dark Blue |
+| stage3 | #0D47A1 | Darker Blue |
+| stage4 | #0A3D91 | Navy（色相環起点） |
+| stage5 | #8E24AA | Purple |
+| stage6 | #D81B60 | Pink |
+| stage7 | #FF5252 | Red |
+| stage8 | #FF6F00 | Deep Orange |
+| stage9 | #FF9800 | Orange |
+| stage10 | #FFB300 | Amber |
+| stage11 | #C0CA33 | Lime |
+| stage12 | #4CAF50 | Green |
+| stage13 | #00897B | Teal → stage1へ |
+
+## グローエフェクト
+
+ダークモードでのみ有効なグローエフェクトです。
+
+| レベル | ダークモード | ライトモード |
+|--------|------------|------------|
+| Soft | 0 0 10px rgba(255, 179, 0, 0.3) | none |
+| Medium | 0 0 20px rgba(255, 179, 0, 0.4) | none |
+| Strong | 0 0 30px rgba(255, 179, 0, 0.5) | none |
+| Text | 0 0 8px rgba(255, 179, 0, 0.6) | none |
 
 ## 使用方法
 
@@ -75,6 +112,7 @@ FUI Theme のカラーシステムについて解説します。
 
 ```tsx
 import { getColors, type ThemeMode } from '@suwa-sh/mui-fui-theme';
+import { useTheme } from '@mui/material';
 
 function MyComponent() {
   const theme = useTheme();
@@ -82,8 +120,14 @@ function MyComponent() {
   const colors = getColors(mode);
 
   return (
-    <Box sx={{ color: colors.primary }}>
-      Primary colored text
+    <Box
+      sx={{
+        color: colors.text.primary,
+        backgroundColor: colors.background.paper,
+        borderColor: colors.border,
+      }}
+    >
+      Styled content
     </Box>
   );
 }
@@ -99,39 +143,79 @@ function WorkflowStep({ stage }: { stage: number }) {
   const mode = theme.palette.mode as ThemeMode;
   const stageColors = getStageColors(mode);
 
-  // stage1 ~ stage12 まで対応
+  // stage1 ~ stage13 まで対応
   const stageKey = `stage${stage}` as keyof typeof stageColors;
   const color = stageColors[stageKey];
 
   return (
-    <Box sx={{ borderColor: color }}>
+    <Box sx={{ borderColor: color, color }}>
       Step {stage}
     </Box>
   );
 }
 ```
 
-### getThemeColors() の使用
+### getGlowEffects() の使用
 
 ```tsx
-import { getThemeColors, type ThemeMode } from '@suwa-sh/mui-fui-theme';
+import { getGlowEffects, type ThemeMode } from '@suwa-sh/mui-fui-theme';
 
-function Sidebar() {
+function GlowingCard() {
   const theme = useTheme();
   const mode = theme.palette.mode as ThemeMode;
-  const themeColors = getThemeColors(mode);
+  const glowEffects = getGlowEffects(mode);
 
   return (
-    <Box
+    <Card
       sx={{
-        backgroundColor: themeColors.background.default,
-        borderColor: themeColors.border,
-        color: themeColors.text.primary,
+        boxShadow: glowEffects.soft,
+        '&:hover': {
+          boxShadow: glowEffects.medium,
+        },
       }}
     >
-      Sidebar content
-    </Box>
+      Hover me
+    </Card>
   );
+}
+```
+
+### FuiColors型の構造
+
+```tsx
+interface FuiColors {
+  primary: string;
+  secondary: string;
+  stages: {
+    stage1: string;
+    stage2: string;
+    // ... stage13まで
+  };
+  background: {
+    default: string;
+    paper: string;
+    elevated: string;
+    input: string;
+  };
+  text: {
+    primary: string;
+    secondary: string;
+    disabled: string;
+    accent: string;
+  };
+  border: string;
+  borderBright: string;
+  success: string;
+  error: string;
+  warning: string;
+  info: string;
+  glow: {
+    soft: string;
+    medium: string;
+    strong: string;
+    text: string;
+  };
+  gridOpacity: number;
 }
 ```
 
@@ -152,7 +236,7 @@ FUI Theme のカラーは、WCAG 2.1 Level AA のコントラスト比要件を�
 <Chip
   icon={<CheckCircle />}
   label="Completed"
-  sx={{ color: stageColors.stage5 }}
+  sx={{ color: stageColors.stage13 }}
 />
 ```
 

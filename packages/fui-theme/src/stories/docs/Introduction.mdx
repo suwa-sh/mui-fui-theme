@@ -5,21 +5,25 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 # FUI Theme
 
-**FUI (Futuristic User Interface) Theme** は、MUI (Material-UI) をベースとした未来的なデザインシステムです。
+**FUI (Futuristic User Interface) Theme** は、MUI (Material-UI) をベースとした未来的なデザインシステムです。J.A.R.V.I.S. スタイルのHUD/FUIデザインを実現します。
 
 ## 特徴
 
 - **シャープなエッジ**: 角丸を排除したシャープなデザイン
 - **グローエフェクト**: ダークモードで映える光るエフェクト
 - **モノスペースフォント**: JetBrains Mono を採用したテクニカルな雰囲気
-- **ステージカラー**: ワークフローの段階を表現する色相環ベースのカラースキーム
+- **ステージカラー**: 13段階のカラースキーム（stage1-4: グラデーション、stage4→13→1: 色相環）
 - **ダーク/ライトモード対応**: 両モードで最適化されたカラーパレット
 - **レスポンシブ対応**: ブレークポイント別のサイズ定義
+- **CodeMirror統合**: エディタ用テーマ
+- **CSSアニメーション**: fadeIn, pulse, scanLine など13種類
 
 ## インストール
 
 ```bash
 pnpm add @suwa-sh/mui-fui-theme
+# or
+npm install @suwa-sh/mui-fui-theme
 ```
 
 ## 基本的な使い方
@@ -27,8 +31,7 @@ pnpm add @suwa-sh/mui-fui-theme
 ### テーマの適用
 
 ```tsx
-import { ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider, CssBaseline } from '@mui/material';
 import { createFuiTheme } from '@suwa-sh/mui-fui-theme';
 
 function App() {
@@ -46,27 +49,32 @@ function App() {
 ### カラーとエフェクトの取得
 
 ```tsx
-import { getThemeColors, getGlowEffects, getStageColors } from '@suwa-sh/mui-fui-theme';
+import { getColors, getGlowEffects, getStageColors } from '@suwa-sh/mui-fui-theme';
 
-// テーマカラー
-const themeColors = getThemeColors('dark');
-themeColors.text.accent   // アクセントカラー
-themeColors.text.primary  // プライマリテキスト
-themeColors.background.paper // 背景色
+// テーマカラー（FuiColors型）
+const colors = getColors('dark');
+colors.primary           // プライマリカラー（ダーク: #FFB300, ライト: #1976D2）
+colors.text.accent       // アクセントカラー
+colors.text.primary      // プライマリテキスト
+colors.background.paper  // ペーパー背景色
+colors.background.elevated // 浮き上がった背景色
+colors.background.input  // 入力フィールド背景
 
 // グローエフェクト
 const glowEffects = getGlowEffects('dark');
 glowEffects.soft    // 控えめな光
 glowEffects.medium  // 中程度の光
 glowEffects.strong  // 強い光
+glowEffects.text    // テキスト用
 
-// ステージカラー（ワークフロー用）
+// ステージカラー（13段階）
+// stage1-4: テーマカラーのグラデーション
+// stage4→13→1: 色相環（Deep Orange → Red → ... → Green → stage1に戻る）
 const stageColors = getStageColors('dark');
-stageColors.stage1  // 第1段階
-stageColors.stage2  // 第2段階
-stageColors.stage3  // 第3段階
-stageColors.stage4  // 第4段階
-// ...stage12まで対応
+stageColors.stage1  // #FFB300 Amber（ダーク）/ #1976D2 Blue（ライト）
+stageColors.stage4  // #FF6F00 Deep Orange（色相環の起点）
+stageColors.stage13 // #4CAF50 Green
+// ...stage13まで対応
 ```
 
 ### コンポーネントの使用
@@ -78,18 +86,22 @@ import {
   IconBox,
   ProgressBar,
   StatusIndicator,
+  NavMenuItem,
+  SectionHeader,
+  ColorLegend,
+  ChartTooltip,
 } from '@suwa-sh/mui-fui-theme';
 
 // グリッドレイアウト
-<AppGrid>
-  <Box>Content</Box>
+<AppGrid container spacing={2}>
+  <AppGrid size={{ xs: 12, md: 6 }}>Content</AppGrid>
 </AppGrid>
 
 // ダイヤモンドノード
 <DiamondNode
   icon={<CheckIcon />}
   label="Step 1"
-  status="success"
+  color={stageColors.stage1}
 />
 
 // アイコンボックス
@@ -108,6 +120,41 @@ import {
 <StatusIndicator status="success" label="Active" />
 ```
 
+### アニメーションの使用
+
+```tsx
+import { fadeInUp, pulse, scanLine, glowPulse } from '@suwa-sh/mui-fui-theme';
+
+<Box sx={{ animation: `${fadeInUp} 0.5s ease-out` }}>
+  Fade in content
+</Box>
+```
+
+### Hooksの使用
+
+```tsx
+import { useTextDecode, useScrollAnimation } from '@suwa-sh/mui-fui-theme';
+
+// Matrix/JARVIS風テキストデコード
+function DecodedTitle() {
+  const { text, isDecoding } = useTextDecode('SYSTEM ONLINE', {
+    speed: 50,
+    startOnMount: true,
+  });
+  return <Typography>{text}</Typography>;
+}
+
+// スクロールトリガーアニメーション
+function AnimatedSection() {
+  const { ref, isVisible } = useScrollAnimation();
+  return (
+    <Box ref={ref} sx={{ opacity: isVisible ? 1 : 0 }}>
+      Content
+    </Box>
+  );
+}
+```
+
 ## エクスポート一覧
 
 ### テーマ関連
@@ -116,8 +163,9 @@ import {
 |------------|------|
 | `createFuiTheme` | MUIテーマを生成 |
 | `createFuiCustomTheme` | レスポンシブ対応のカスタムテーマを生成 |
-| `getThemeColors` | テーマモード別のカラーを取得 |
-| `getStageColors` | ステージカラーを取得 |
+| `getColors` | テーマモード別のFuiColorsを取得 |
+| `getThemeColors` | getColorsのエイリアス |
+| `getStageColors` | ステージカラー（13段階）を取得 |
 | `getGlowEffects` | グローエフェクトを取得 |
 | `createFuiCodeMirrorTheme` | CodeMirror用テーマを生成 |
 
@@ -126,14 +174,14 @@ import {
 #### Layout
 | コンポーネント | 説明 |
 |--------------|------|
-| `AppGrid` | グリッド背景付きレイアウト |
+| `AppGrid` | MUI Grid2のラッパー（レスポンシブレイアウト） |
 
 #### Atoms
 | コンポーネント | 説明 |
 |--------------|------|
 | `NavMenuItem` | ナビゲーションメニューアイテム |
-| `ProgressBar` | 進捗バー |
-| `ChartTooltip` | チャート用ツールチップ |
+| `ProgressBar` | アニメーション付き進捗バー |
+| `ChartTooltip` | recharts用ツールチップ |
 | `ColorLegend` | カラー凡例 |
 | `StatusIndicator` | ステータスインジケータ |
 | `SectionHeader` | セクションヘッダー |
@@ -144,25 +192,44 @@ import {
 | `DiamondNode` | ダイヤモンド型ノード |
 | `IconBox` | アイコンボックス |
 
+### アニメーション
+
+| アニメーション | 説明 |
+|--------------|------|
+| `fadeInUp`, `fadeInLeft`, `fadeInRight` | フェードイン |
+| `slideInDiagonal` | 斜めスライドイン |
+| `scaleIn`, `rotateIn` | スケール・回転 |
+| `pulse`, `glowPulse` | パルス |
+| `float`, `hologramFlicker` | フロート・フリッカー |
+| `scanLine`, `dataStream`, `gridPulse` | HUD/サイバー |
+
+### Hooks
+
+| Hook | 説明 |
+|------|------|
+| `useTextDecode` | Matrix/JARVIS風テキストスクランブル |
+| `useScrollAnimation` | スクロールトリガーアニメーション |
+
 ### 型定義
 
 | 型 | 説明 |
 |---|------|
 | `ThemeMode` | `'dark' \| 'light'` |
-| `NavMenuItemProps` | ナビゲーションアイテムの型 |
-| `StatusType` | ステータスの種類 |
+| `FuiColors` | テーマカラー型 |
+| `FuiCustomTheme` | カスタムテーマ型 |
+| `ResponsiveValue` | レスポンシブ値型 |
 
 ## Storybook 構成
 
 - **Docs**: ドキュメント（Introduction、Design Principles、Color Guidelines）
-- **Foundations**: 基盤となるデザイン要素（カラー、グロー効果）
-- **Atoms**: 基本UIコンポーネント（NavMenuItem、ProgressBar、StatusIndicator など）
-- **Molecules**: 複合コンポーネント（DiamondNode、IconBox）
+- **Foundations**: 基盤となるデザイン要素（カラー、グロー効果、タイポグラフィ）
+- **Atoms**: 基本UIコンポーネント
+- **Molecules**: 複合コンポーネント
 - **Pages**: ページレベルの組み合わせ例
 
 ## Pro版について
 
-より高度なコンポーネント（ナビゲーション、ダッシュボード、チャート）が必要な場合は、[mui-fui-theme-pro](https://github.com/suwa-sh/mui-fui-theme-pro) をご検討ください。
+より高度なコンポーネント（Sidebar、Dashboard、Charts）が必要な場合は、**@suwa-sh/mui-fui-theme-pro**（準備中）をご検討ください。
 
 ## 次のステップ
 
