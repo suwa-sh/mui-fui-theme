@@ -49,7 +49,6 @@ function App() {
 
 - `NavMenuItem` - Navigation menu item
 - `ProgressBar` - Animated progress bar
-- `ChartTooltip` - Chart tooltip (for use with recharts)
 - `ColorLegend` - Color legend display
 - `StatusIndicator` - Status indicator with colors
 - `SectionHeader` - Section header with decorations
@@ -58,11 +57,6 @@ function App() {
 
 - `DiamondNode` - Diamond-shaped node
 - `IconBox` - Icon container with FUI styling
-- `Progress` - Multi-item progress display
-- `CodeEditor` - CodeMirror-based editor (YAML/JSON/Markdown)
-- `FileUpload` - Drag-and-drop file upload
-- `DiagonalDivider` - Diagonal section divider
-- `DecodedTitle` - Animated text decode title
 
 ## Animations
 
@@ -87,40 +81,29 @@ Available CSS keyframe animations:
 
 Need more components? Check out **@suwa-sh/mui-fui-theme-pro** (coming soon) for:
 
-### Navigation
+**Atoms:** `ChartTooltip`
 
-- `Sidebar` - Full-featured collapsible sidebar
-- `SidebarLogo` - Branded logo header
-- `NavMenuGroup` - Grouped navigation with stage indicators
+**Molecules:** `NavMenuGroup`, `SidebarLogo`, `MetricCard`, `FuiTable`, `HeatmapLegend`, `HUDOverlay`, `VisualPanel`, `DiagonalDivider`, `CodeEditor`, `DecodedTitle`, `FileUpload`, `Progress`
 
-### Dashboard
-
-- `MetricCard` - KPI metric card with trends
-- `FuiTable` - Styled data table
-- `HeatmapLegend` - Heatmap legend
-- `HUDOverlay` - HUD scan line overlay
-- `VisualPanel` - Decorative visual panel
-
-### Charts (recharts integration)
-
-- `FuiAreaChart` - Area chart with FUI styling
-- `FuiBarChart` - Bar chart with FUI styling
-- `FuiRadarChart` - Radar chart with FUI styling
+**Organisms:** `Sidebar`, `FuiAreaChart`, `FuiBarChart`, `FuiRadarChart`
 
 <!-- Pro documentation link will be added when available -->
 
-## Development Console Logs
+## Console Banner
 
-In development mode, the theme may output debug information. To silence:
+On first theme creation, a banner is displayed in the console. To disable:
 
 ```typescript
-// Option 1: Via environment variable
-process.env.MUI_FUI_THEME_SILENT = 'true';
+// Option 1: Via environment variable (Node.js)
+process.env.FUI_THEME_SILENT = 'true';
 
-// Option 2: Via window global (browser)
-window.MUI_FUI_THEME_SILENT = true;
+// Option 2: Via Vite environment variable
+// .env: FUI_THEME_SILENT=true or VITE_FUI_THEME_SILENT=true
 
-// Option 3: Per-logger instance
+// Option 3: Via window global (browser)
+window.FUI_THEME_SILENT = true;
+
+// Option 4: Per-logger instance
 import { createLogger } from '@suwa-sh/mui-fui-theme';
 const logger = createLogger({ disableConsole: true });
 ```
