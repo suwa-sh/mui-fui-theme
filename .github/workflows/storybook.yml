@@ -1,4 +1,4 @@
-name: Deploy Storybook
+name: Deploy GitHub Pages
 
 on:
   push:
@@ -34,9 +34,20 @@ jobs:
       - name: Build Storybook
         run: pnpm --filter @suwa-sh/mui-fui-theme build-storybook
 
+      - name: Prepare GitHub Pages
+        run: |
+          mkdir -p _site
+          # Copy landing page from docs/ (pre-built locally from Pro repo)
+          if [ -d "docs" ]; then
+            cp -r docs/* _site/
+          fi
+          # Copy Storybook to /storybook subdirectory
+          mkdir -p _site/storybook
+          cp -r packages/fui-theme/storybook-static/* _site/storybook/
+
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: packages/fui-theme/storybook-static
+          path: _site
 
   deploy:
     environment:
