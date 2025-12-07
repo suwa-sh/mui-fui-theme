@@ -89,7 +89,6 @@ import {
   NavMenuItem,
   SectionHeader,
   ColorLegend,
-  ChartTooltip,
 } from '@suwa-sh/mui-fui-theme';
 
 // グリッドレイアウト
@@ -98,17 +97,14 @@ import {
 </AppGrid>
 
 // ダイヤモンドノード
-<DiamondNode
-  icon={<CheckIcon />}
-  label="Step 1"
-  color={stageColors.stage1}
-/>
+<DiamondNode color={stageColors.stage1} size={60}>
+  <CheckIcon sx={{ color: stageColors.stage1 }} />
+</DiamondNode>
 
 // アイコンボックス
-<IconBox
-  icon={<SettingsIcon />}
-  color={stageColors.stage1}
-/>
+<IconBox color={stageColors.stage1} size={48}>
+  <SettingsIcon />
+</IconBox>
 
 // 進捗バー
 <ProgressBar
@@ -137,16 +133,16 @@ import { useTextDecode, useScrollAnimation } from '@suwa-sh/mui-fui-theme';
 
 // Matrix/JARVIS風テキストデコード
 function DecodedTitle() {
-  const { text, isDecoding } = useTextDecode('SYSTEM ONLINE', {
-    speed: 50,
-    startOnMount: true,
+  const { displayText, isComplete } = useTextDecode('SYSTEM ONLINE', {
+    startDelay: 500,  // アニメーション開始までの遅延(ms)
+    duration: 2000,   // アニメーション全体の時間(ms)
   });
-  return <Typography>{text}</Typography>;
+  return <Typography>{displayText}</Typography>;
 }
 
 // スクロールトリガーアニメーション
 function AnimatedSection() {
-  const { ref, isVisible } = useScrollAnimation();
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
   return (
     <Box ref={ref} sx={{ opacity: isVisible ? 1 : 0 }}>
       Content
@@ -181,7 +177,6 @@ function AnimatedSection() {
 |--------------|------|
 | `NavMenuItem` | ナビゲーションメニューアイテム |
 | `ProgressBar` | アニメーション付き進捗バー |
-| `ChartTooltip` | recharts用ツールチップ |
 | `ColorLegend` | カラー凡例 |
 | `StatusIndicator` | ステータスインジケータ |
 | `SectionHeader` | セクションヘッダー |
@@ -210,6 +205,14 @@ function AnimatedSection() {
 | `useTextDecode` | Matrix/JARVIS風テキストスクランブル |
 | `useScrollAnimation` | スクロールトリガーアニメーション |
 
+### Logger
+
+| エクスポート | 説明 |
+|------------|------|
+| `createLogger` | カスタムロガーを生成 |
+| `logger` | デフォルトロガーインスタンス |
+| `showBanner` | FUI Themeのバナーを表示 |
+
 ### 型定義
 
 | 型 | 説明 |
@@ -218,6 +221,10 @@ function AnimatedSection() {
 | `FuiColors` | テーマカラー型 |
 | `FuiCustomTheme` | カスタムテーマ型 |
 | `ResponsiveValue` | レスポンシブ値型 |
+| `UseTextDecodeOptions` | useTextDecode オプション型 |
+| `UseTextDecodeResult` | useTextDecode 戻り値型 |
+| `UseScrollAnimationOptions` | useScrollAnimation オプション型 |
+| `UseScrollAnimationResult` | useScrollAnimation 戻り値型 |
 
 ## Storybook 構成
 
