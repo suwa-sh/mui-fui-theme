@@ -6,9 +6,7 @@ settings:
 
 importers:
 
-  .: {}
-
-  packages/fui-theme:
+  .:
     dependencies:
       '@codemirror/lang-json':
         specifier: ^6.0.2

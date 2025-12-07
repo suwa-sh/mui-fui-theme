@@ -1,10 +1,97 @@
 {
-  "name": "mui-fui-theme-monorepo",
-  "private": true,
-  "scripts": {
-    "build": "pnpm --filter @suwa-sh/mui-fui-theme build",
-    "storybook": "pnpm --filter @suwa-sh/mui-fui-theme storybook",
-    "build-storybook": "pnpm --filter @suwa-sh/mui-fui-theme build-storybook"
+  "name": "@suwa-sh/mui-fui-theme",
+  "version": "0.1.0",
+  "description": "Futuristic User Interface (FUI/HUD) theme for MUI and CodeMirror - J.A.R.V.I.S. style",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./codemirror": {
+      "import": "./dist/codemirror.js",
+      "types": "./dist/codemirror.d.ts"
+    }
   },
-  "devDependencies": {}
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "lint": "eslint src/",
+    "test": "vitest run"
+  },
+  "peerDependencies": {
+    "@emotion/react": "^11.0.0",
+    "@emotion/styled": "^11.0.0",
+    "@lezer/highlight": "^1.0.0",
+    "@mui/material": "^6.0.0",
+    "@uiw/codemirror-themes": "^4.0.0",
+    "react": "^18.0.0 || ^19.0.0"
+  },
+  "dependencies": {
+    "@codemirror/lang-json": "^6.0.2",
+    "@codemirror/lang-markdown": "^6.5.0",
+    "@codemirror/lang-yaml": "^6.1.2",
+    "@codemirror/view": "^6.38.8",
+    "@uiw/react-codemirror": "^4.25.3"
+  },
+  "devDependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@eslint/js": "^9.39.1",
+    "@lezer/highlight": "^1.2.3",
+    "@mui/icons-material": "^6.3.0",
+    "@mui/material": "^6.3.0",
+    "@storybook/addon-a11y": "^10.1.4",
+    "@storybook/addon-docs": "^10.1.4",
+    "@storybook/addon-themes": "^10.1.4",
+    "@storybook/addon-vitest": "^10.1.4",
+    "@storybook/react-vite": "^10.1.4",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@uiw/codemirror-themes": "^4.25.3",
+    "@vitest/browser-playwright": "^4.0.15",
+    "@vitest/coverage-v8": "^4.0.15",
+    "eslint": "^9.39.1",
+    "globals": "^16.5.0",
+    "playwright": "^1.57.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "remark-gfm": "^4.0.1",
+    "storybook": "^10.1.4",
+    "typescript": "~5.7.2",
+    "typescript-eslint": "^8.48.1",
+    "vite": "^6.0.5",
+    "vitest": "^4.0.15"
+  },
+  "keywords": [
+    "mui",
+    "theme",
+    "fui",
+    "hud",
+    "futuristic",
+    "dark-mode",
+    "light-mode",
+    "codemirror",
+    "jarvis"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/suwa-sh/mui-fui-theme.git"
+  },
+  "homepage": "https://suwa-sh.github.io/mui-fui-theme",
+  "bugs": {
+    "url": "https://github.com/suwa-sh/mui-fui-theme/issues"
+  }
 }
