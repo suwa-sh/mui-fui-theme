@@ -3,15 +3,24 @@ import type { Theme } from '@mui/material/styles';
 import { createFuiCustomTheme } from './responsive';
 import { showBanner } from './logger';
 
+// Import Design Tokens
+import coreTokens from '../tokens/core.json';
+import darkTokens from '../tokens/dark.json';
+import lightTokens from '../tokens/light.json';
+
 // Import augmentation to enable theme.fui type
 import './augmentation';
 
 // ============================================================
 // FUI/HUD THEME - J.A.R.V.I.S. Style
 // Supports both Dark (Black + Amber) and Light modes
+// Design Tokens: tokens/*.json (Single Source of Truth)
 // ============================================================
 
 export type ThemeMode = 'dark' | 'light';
+
+// Helper function to extract value from Figma Token format
+const getValue = <T>(token: { value: T }): T => token.value;
 
 // FUI Color palette type
 export interface FuiColors {
@@ -59,111 +68,71 @@ export interface FuiColors {
   gridOpacity: number;
 }
 
-// FUI Color palette generator
+// Export Design Tokens for external use
+export { coreTokens, darkTokens, lightTokens };
+
+// FUI Color palette generator - reads from Design Tokens
 const createColors = (mode: ThemeMode): FuiColors => {
-  const isDark = mode === 'dark';
+  const tokens = mode === 'dark' ? darkTokens : lightTokens;
 
   return {
-    // Primary: Amber (dark) / Blue (light) - FUI style
-    primary: isDark ? '#FFB300' : '#1976D2', // Amber (dark) / Blue (light)
-    secondary: isDark ? '#FF8F00' : '#0D47A1', // Darker Amber (dark) / Dark Blue (light)
+    // Primary colors from tokens
+    primary: getValue(tokens.colors.primary),
+    secondary: getValue(tokens.colors.secondary),
 
-    // Stage colors - 13 colors (Dark: Amber gradient + color wheel / Light: Blue gradient + color wheel)
-    stages: isDark
-      ? {
-          // Dark mode: stage1-4 = Amber gradient (original), stage5-13 = color wheel
-          stage1: '#FFB300',   // Amber
-          stage2: '#FFA000',   // Dark Amber
-          stage3: '#FF8F00',   // Orange Amber
-          stage4: '#FF6F00',   // Deep Orange
-          stage5: '#FF5252',   // Red (赤)
-          stage6: '#FF4081',   // Pink (赤紫)
-          stage7: '#E040FB',   // Purple (紫)
-          stage8: '#651FFF',   // Deep Purple (青紫)
-          stage9: '#3D5AFE',   // Indigo (藍)
-          stage10: '#2979FF',  // Blue (青)
-          stage11: '#00E5FF',  // Cyan (青緑)
-          stage12: '#1DE9B6',  // Teal (緑青)
-          stage13: '#4CAF50',  // Green (緑)
-        }
-      : {
-          // Light mode: stage1-4 = Blue gradient (original), stage5-13 = color wheel
-          stage1: '#1976D2',   // Blue
-          stage2: '#1565C0',   // Dark Blue
-          stage3: '#0D47A1',   // Darker Blue
-          stage4: '#0A3D91',   // Navy
-          stage5: '#8E24AA',   // Purple
-          stage6: '#D81B60',   // Pink
-          stage7: '#FF5252',   // Red
-          stage8: '#FF6F00',   // Deep Orange
-          stage9: '#FF9800',   // Orange
-          stage10: '#FFB300',  // Amber
-          stage11: '#C0CA33',  // Lime
-          stage12: '#4CAF50',  // Green
-          stage13: '#00897B',  // Teal
-        },
+    // Stage colors from tokens
+    stages: {
+      stage1: getValue(tokens.colors.stages.stage1),
+      stage2: getValue(tokens.colors.stages.stage2),
+      stage3: getValue(tokens.colors.stages.stage3),
+      stage4: getValue(tokens.colors.stages.stage4),
+      stage5: getValue(tokens.colors.stages.stage5),
+      stage6: getValue(tokens.colors.stages.stage6),
+      stage7: getValue(tokens.colors.stages.stage7),
+      stage8: getValue(tokens.colors.stages.stage8),
+      stage9: getValue(tokens.colors.stages.stage9),
+      stage10: getValue(tokens.colors.stages.stage10),
+      stage11: getValue(tokens.colors.stages.stage11),
+      stage12: getValue(tokens.colors.stages.stage12),
+      stage13: getValue(tokens.colors.stages.stage13),
+    },
 
-    // Backgrounds
-    background: isDark
-      ? {
-          default: '#000000',
-          paper: '#0a0a0a',
-          elevated: '#111111',
-          input: 'rgba(0, 0, 0, 0.3)',
-        }
-      : {
-          default: '#f5f5f0',
-          paper: '#ffffff',
-          elevated: '#fafafa',
-          input: 'rgba(245, 244, 240, 0.85)',
-        },
+    // Backgrounds from tokens
+    background: {
+      default: getValue(tokens.colors.background.default),
+      paper: getValue(tokens.colors.background.paper),
+      elevated: getValue(tokens.colors.background.elevated),
+      input: getValue(tokens.colors.background.input),
+    },
 
-    // Text
-    text: isDark
-      ? {
-          primary: '#ffffff',
-          secondary: 'rgba(255, 255, 255, 0.7)',
-          disabled: 'rgba(255, 255, 255, 0.4)',
-          accent: '#FFB300',
-        }
-      : {
-          primary: '#1a1a1a',
-          secondary: 'rgba(0, 0, 0, 0.65)',
-          disabled: 'rgba(0, 0, 0, 0.45)',
-          accent: '#1565C0', // Blue for light mode (FUI style)
-        },
+    // Text from tokens
+    text: {
+      primary: getValue(tokens.colors.text.primary),
+      secondary: getValue(tokens.colors.text.secondary),
+      disabled: getValue(tokens.colors.text.disabled),
+      accent: getValue(tokens.colors.text.accent),
+    },
 
-    // Borders
-    border: isDark
-      ? 'rgba(255, 179, 0, 0.2)'
-      : 'rgba(21, 101, 192, 0.25)', // Blue for light mode
-    borderBright: isDark
-      ? 'rgba(255, 179, 0, 0.4)'
-      : 'rgba(21, 101, 192, 0.5)', // Blue for light mode
+    // Borders from tokens
+    border: getValue(tokens.colors.border),
+    borderBright: getValue(tokens.colors.borderBright),
 
-    // Status colors
-    success: '#4CAF50',
-    error: '#FF5252',
-    warning: isDark ? '#FF6D00' : '#FF9800', // Orange for dark mode (between amber and red)
-    info: isDark ? '#FFB300' : '#1565C0', // Use theme primary color for info
+    // Status colors (success/error from core, warning/info from mode-specific)
+    success: getValue(coreTokens.status.success),
+    error: getValue(coreTokens.status.error),
+    warning: getValue(tokens.colors.warning),
+    info: getValue(tokens.colors.info),
 
-    // Glow effect (none in light mode for cleaner look)
-    glow: isDark
-      ? {
-          soft: '0 0 10px rgba(255, 179, 0, 0.3)',
-          medium: '0 0 20px rgba(255, 179, 0, 0.4)',
-          strong: '0 0 30px rgba(255, 179, 0, 0.5)',
-          text: '0 0 8px rgba(255, 179, 0, 0.6)',
-        }
-      : {
-          soft: 'none',
-          medium: 'none',
-          strong: 'none',
-          text: 'none',
-        },
+    // Glow effects from tokens
+    glow: {
+      soft: getValue(tokens.effects.glow.soft),
+      medium: getValue(tokens.effects.glow.medium),
+      strong: getValue(tokens.effects.glow.strong),
+      text: getValue(tokens.effects.glow.text),
+    },
 
-    // Grid pattern opacity
-    gridOpacity: isDark ? 0.02 : 0.04,
+    // Grid pattern opacity from tokens
+    gridOpacity: parseFloat(getValue(tokens.effects.gridOpacity)),
   };
 };
 
@@ -172,6 +141,7 @@ export const createFuiTheme = (mode: ThemeMode = 'dark'): Theme => {
   showBanner();
 
   const colors = createColors(mode);
+  const tokens = mode === 'dark' ? darkTokens : lightTokens;
   const isDark = mode === 'dark';
   const fuiCustom = createFuiCustomTheme();
 
@@ -182,14 +152,14 @@ export const createFuiTheme = (mode: ThemeMode = 'dark'): Theme => {
       mode,
       primary: {
         main: colors.primary,
-        light: alpha(colors.primary, 0.3),
-        dark: '#FF8F00',
-        contrastText: isDark ? '#000000' : '#ffffff',
+        light: alpha(colors.primary, parseFloat(getValue(tokens.opacity.primaryLight))),
+        dark: getValue(tokens.colors.primaryDark),
+        contrastText: getValue(tokens.colors.contrastText),
       },
       secondary: {
         main: colors.secondary,
-        light: alpha(colors.secondary, 0.3),
-        contrastText: isDark ? '#000000' : '#ffffff',
+        light: alpha(colors.secondary, parseFloat(getValue(tokens.opacity.primaryLight))),
+        contrastText: getValue(tokens.colors.contrastText),
       },
       background: {
         default: colors.background.default,
@@ -212,59 +182,59 @@ export const createFuiTheme = (mode: ThemeMode = 'dark'): Theme => {
       },
     },
     typography: {
-      fontFamily: '"JetBrains Mono", "Noto Sans JP", monospace',
+      fontFamily: getValue(coreTokens.typography.fontFamily),
       h1: {
-        fontWeight: 500,
-        letterSpacing: '0.05em',
-        textTransform: 'uppercase' as const,
+        fontWeight: parseInt(getValue(coreTokens.typography.h1.fontWeight)),
+        letterSpacing: getValue(coreTokens.typography.h1.letterSpacing),
+        textTransform: getValue(coreTokens.typography.h1.textTransform) as 'uppercase',
       },
       h2: {
-        fontWeight: 500,
-        letterSpacing: '0.04em',
-        textTransform: 'uppercase' as const,
+        fontWeight: parseInt(getValue(coreTokens.typography.h2.fontWeight)),
+        letterSpacing: getValue(coreTokens.typography.h2.letterSpacing),
+        textTransform: getValue(coreTokens.typography.h2.textTransform) as 'uppercase',
       },
       h3: {
-        fontWeight: 500,
-        letterSpacing: '0.03em',
+        fontWeight: parseInt(getValue(coreTokens.typography.h3.fontWeight)),
+        letterSpacing: getValue(coreTokens.typography.h3.letterSpacing),
       },
       h4: {
-        fontWeight: 500,
-        letterSpacing: '0.02em',
+        fontWeight: parseInt(getValue(coreTokens.typography.h4.fontWeight)),
+        letterSpacing: getValue(coreTokens.typography.h4.letterSpacing),
       },
       h5: {
-        fontWeight: 500,
-        letterSpacing: '0.02em',
+        fontWeight: parseInt(getValue(coreTokens.typography.h5.fontWeight)),
+        letterSpacing: getValue(coreTokens.typography.h5.letterSpacing),
       },
       h6: {
-        fontWeight: 500,
-        letterSpacing: '0.02em',
+        fontWeight: parseInt(getValue(coreTokens.typography.h6.fontWeight)),
+        letterSpacing: getValue(coreTokens.typography.h6.letterSpacing),
       },
       body1: {
-        fontWeight: 400,
-        lineHeight: 1.6,
-        letterSpacing: '0.01em',
+        fontWeight: parseInt(getValue(coreTokens.typography.body1.fontWeight)),
+        lineHeight: parseFloat(getValue(coreTokens.typography.body1.lineHeight)),
+        letterSpacing: getValue(coreTokens.typography.body1.letterSpacing),
       },
       body2: {
-        fontWeight: 400,
-        lineHeight: 1.5,
-        letterSpacing: '0.01em',
+        fontWeight: parseInt(getValue(coreTokens.typography.body2.fontWeight)),
+        lineHeight: parseFloat(getValue(coreTokens.typography.body2.lineHeight)),
+        letterSpacing: getValue(coreTokens.typography.body2.letterSpacing),
       },
       button: {
-        fontWeight: 500,
-        letterSpacing: '0.08em',
-        textTransform: 'uppercase' as const,
+        fontWeight: parseInt(getValue(coreTokens.typography.button.fontWeight)),
+        letterSpacing: getValue(coreTokens.typography.button.letterSpacing),
+        textTransform: getValue(coreTokens.typography.button.textTransform) as 'uppercase',
       },
       caption: {
-        letterSpacing: '0.05em',
-        textTransform: 'uppercase' as const,
+        letterSpacing: getValue(coreTokens.typography.caption.letterSpacing),
+        textTransform: getValue(coreTokens.typography.caption.textTransform) as 'uppercase',
       },
       overline: {
-        letterSpacing: '0.15em',
-        fontWeight: 500,
+        letterSpacing: getValue(coreTokens.typography.overline.letterSpacing),
+        fontWeight: parseInt(getValue(coreTokens.typography.overline.fontWeight)),
       },
     },
     shape: {
-      borderRadius: 2,
+      borderRadius: parseInt(getValue(coreTokens.spacing.borderRadius)),
     },
     components: {
       MuiCssBaseline: {
@@ -288,19 +258,13 @@ export const createFuiTheme = (mode: ThemeMode = 'dark'): Theme => {
             height: '6px',
           },
           '::-webkit-scrollbar-track': {
-            background: isDark
-              ? 'rgba(255, 179, 0, 0.05)'
-              : 'rgba(21, 101, 192, 0.05)',
+            background: getValue(tokens.colors.scrollbar.track),
           },
           '::-webkit-scrollbar-thumb': {
-            background: isDark
-              ? 'rgba(255, 179, 0, 0.3)'
-              : 'rgba(21, 101, 192, 0.25)',
+            background: getValue(tokens.colors.scrollbar.thumb),
             borderRadius: '0px',
             '&:hover': {
-              background: isDark
-                ? 'rgba(255, 179, 0, 0.5)'
-                : 'rgba(21, 101, 192, 0.4)',
+              background: getValue(tokens.colors.scrollbar.thumbHover),
             },
           },
         },

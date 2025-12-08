@@ -1,7 +1,13 @@
 // ============================================================
 // FUI Custom Theme - Responsive Values
 // Centralized responsive values for consistent layout
+// Design Tokens: tokens/core.json (Single Source of Truth)
 // ============================================================
+
+import coreTokens from '../tokens/core.json';
+
+// Helper function to extract value from Figma Token format
+const getValue = <T>(token: { value: T }): T => token.value;
 
 /**
  * Responsive breakpoint values type
@@ -59,22 +65,37 @@ export interface FuiCustomTheme {
 }
 
 /**
- * Create FUI custom theme values
+ * Create FUI custom theme values - reads from Design Tokens
  */
 export const createFuiCustomTheme = (): FuiCustomTheme => ({
   layout: {
-    drawerWidth: 260,
-    collapsedDrawerWidth: 64,
-    appBarHeight: 64,
-    maxContentWidth: 1200,
+    drawerWidth: parseInt(getValue(coreTokens.layout.drawerWidth)),
+    collapsedDrawerWidth: parseInt(getValue(coreTokens.layout.collapsedDrawerWidth)),
+    appBarHeight: parseInt(getValue(coreTokens.layout.appBarHeight)),
+    maxContentWidth: parseInt(getValue(coreTokens.layout.maxContentWidth)),
   },
   spacing: {
-    page: { xs: 2, sm: 3, md: 4 },
-    section: { xs: 1, sm: 1.5, md: 2 },
+    page: {
+      xs: parseFloat(getValue(coreTokens.responsiveSpacing.page.xs)),
+      sm: parseFloat(getValue(coreTokens.responsiveSpacing.page.sm)),
+      md: parseFloat(getValue(coreTokens.responsiveSpacing.page.md)),
+    },
+    section: {
+      xs: parseFloat(getValue(coreTokens.responsiveSpacing.section.xs)),
+      sm: parseFloat(getValue(coreTokens.responsiveSpacing.section.sm)),
+      md: parseFloat(getValue(coreTokens.responsiveSpacing.section.md)),
+    },
   },
   sizes: {
-    iconBox: { xs: 48, sm: 64, md: 80 },
-    node: { xs: 56, md: 72 },
+    iconBox: {
+      xs: parseInt(getValue(coreTokens.responsiveSizes.iconBox.xs)),
+      sm: parseInt(getValue(coreTokens.responsiveSizes.iconBox.sm)),
+      md: parseInt(getValue(coreTokens.responsiveSizes.iconBox.md)),
+    },
+    node: {
+      xs: parseInt(getValue(coreTokens.responsiveSizes.node.xs)),
+      md: parseInt(getValue(coreTokens.responsiveSizes.node.md)),
+    },
   },
 });
 

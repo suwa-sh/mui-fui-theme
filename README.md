@@ -76,6 +76,49 @@ Available CSS keyframe animations:
 - `useTextDecode` - Matrix/JARVIS-style text scramble effect
 - `useScrollAnimation` - Scroll-triggered animations
 
+## Design Tokens
+
+This package includes design tokens in [Figma Tokens (Tokens Studio)](https://tokens.studio/) format as the Single Source of Truth.
+
+### Token Files
+
+```text
+tokens/
+├── core.json      # Typography, spacing, layout (shared)
+├── dark.json      # Dark mode colors and effects
+└── light.json     # Light mode colors and effects
+```
+
+### Direct Import
+
+```typescript
+// Import tokens directly
+import coreTokens from '@suwa-sh/mui-fui-theme/tokens/core.json';
+import darkTokens from '@suwa-sh/mui-fui-theme/tokens/dark.json';
+import lightTokens from '@suwa-sh/mui-fui-theme/tokens/light.json';
+
+// Or via the main export
+import { coreTokens, darkTokens, lightTokens } from '@suwa-sh/mui-fui-theme';
+```
+
+### Figma Tokens Studio Integration
+
+1. Install [Tokens Studio for Figma](https://tokens.studio/)
+2. Import `tokens/*.json` files as Token Sets
+3. Sync design changes back to JSON
+
+### Token Format
+
+Tokens follow the Figma Tokens format:
+
+```json
+{
+  "colors": {
+    "primary": { "value": "#FFB300", "type": "color" }
+  }
+}
+```
+
 ## Documentation
 
 - [Storybook](https://suwa-sh.github.io/mui-fui-theme) - Interactive component demos
@@ -91,25 +134,6 @@ Need more components? Check out **@suwa-sh/mui-fui-theme-pro** (coming soon) for
 **Organisms:** `Sidebar`, `FuiAreaChart`, `FuiBarChart`, `FuiRadarChart`
 
 <!-- Pro documentation link will be added when available -->
-
-## Console Banner
-
-On first theme creation, a banner is displayed in the console. To disable:
-
-```typescript
-// Option 1: Via environment variable (Node.js)
-process.env.FUI_THEME_SILENT = 'true';
-
-// Option 2: Via Vite environment variable
-// .env: FUI_THEME_SILENT=true or VITE_FUI_THEME_SILENT=true
-
-// Option 3: Via window global (browser)
-window.FUI_THEME_SILENT = true;
-
-// Option 4: Per-logger instance
-import { createLogger } from '@suwa-sh/mui-fui-theme';
-const logger = createLogger({ disableConsole: true });
-```
 
 ## License
 

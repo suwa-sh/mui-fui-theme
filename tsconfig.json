@@ -7,6 +7,8 @@
     "skipLibCheck": true,
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": false,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "isolatedModules": true,
     "moduleDetection": "force",
     "jsx": "react-jsx",
@@ -18,7 +20,11 @@
     "declaration": true,
     "declarationMap": true,
     "outDir": "./dist",
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "baseUrl": ".",
+    "paths": {
+      "../tokens/*": ["tokens/*"]
+    }
   },
   "include": ["src"],
   "exclude": ["src/stories"]

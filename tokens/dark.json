@@ -1,0 +1,61 @@
+{
+  "colors": {
+    "primary": { "value": "#FFB300", "type": "color" },
+    "secondary": { "value": "#FF8F00", "type": "color" },
+    "primaryDark": { "value": "#FF8F00", "type": "color" },
+    "background": {
+      "default": { "value": "#000000", "type": "color" },
+      "paper": { "value": "#0a0a0a", "type": "color" },
+      "elevated": { "value": "#111111", "type": "color" },
+      "input": { "value": "rgba(0, 0, 0, 0.3)", "type": "color" }
+    },
+    "text": {
+      "primary": { "value": "#ffffff", "type": "color" },
+      "secondary": { "value": "rgba(255, 255, 255, 0.7)", "type": "color" },
+      "disabled": { "value": "rgba(255, 255, 255, 0.4)", "type": "color" },
+      "accent": { "value": "#FFB300", "type": "color" }
+    },
+    "border": { "value": "rgba(255, 179, 0, 0.2)", "type": "color" },
+    "borderBright": { "value": "rgba(255, 179, 0, 0.4)", "type": "color" },
+    "warning": { "value": "#FF6D00", "type": "color" },
+    "info": { "value": "#FFB300", "type": "color" },
+    "stages": {
+      "stage1": { "value": "#FFB300", "type": "color", "description": "Amber" },
+      "stage2": { "value": "#FFA000", "type": "color", "description": "Dark Amber" },
+      "stage3": { "value": "#FF8F00", "type": "color", "description": "Orange Amber" },
+      "stage4": { "value": "#FF6F00", "type": "color", "description": "Deep Orange" },
+      "stage5": { "value": "#FF5252", "type": "color", "description": "Red" },
+      "stage6": { "value": "#FF4081", "type": "color", "description": "Pink" },
+      "stage7": { "value": "#E040FB", "type": "color", "description": "Purple" },
+      "stage8": { "value": "#651FFF", "type": "color", "description": "Deep Purple" },
+      "stage9": { "value": "#3D5AFE", "type": "color", "description": "Indigo" },
+      "stage10": { "value": "#2979FF", "type": "color", "description": "Blue" },
+      "stage11": { "value": "#00E5FF", "type": "color", "description": "Cyan" },
+      "stage12": { "value": "#1DE9B6", "type": "color", "description": "Teal" },
+      "stage13": { "value": "#4CAF50", "type": "color", "description": "Green" }
+    },
+    "scrollbar": {
+      "track": { "value": "rgba(255, 179, 0, 0.05)", "type": "color" },
+      "thumb": { "value": "rgba(255, 179, 0, 0.3)", "type": "color" },
+      "thumbHover": { "value": "rgba(255, 179, 0, 0.5)", "type": "color" }
+    },
+    "contrastText": { "value": "#000000", "type": "color" }
+  },
+  "effects": {
+    "glow": {
+      "soft": { "value": "0 0 10px rgba(255, 179, 0, 0.3)", "type": "boxShadow" },
+      "medium": { "value": "0 0 20px rgba(255, 179, 0, 0.4)", "type": "boxShadow" },
+      "strong": { "value": "0 0 30px rgba(255, 179, 0, 0.5)", "type": "boxShadow" },
+      "text": { "value": "0 0 8px rgba(255, 179, 0, 0.6)", "type": "boxShadow" }
+    },
+    "gridOpacity": { "value": "0.02", "type": "opacity" }
+  },
+  "opacity": {
+    "paperBackground": { "value": "0.8", "type": "opacity" },
+    "cardBackground": { "value": "0.6", "type": "opacity" },
+    "appBarBackground": { "value": "0.9", "type": "opacity" },
+    "buttonContained": { "value": "0.15", "type": "opacity" },
+    "buttonContainedHover": { "value": "0.25", "type": "opacity" },
+    "primaryLight": { "value": "0.3", "type": "opacity" }
+  }
+}

@@ -14,10 +14,14 @@
     "./codemirror": {
       "import": "./dist/codemirror.js",
       "types": "./dist/codemirror.d.ts"
-    }
+    },
+    "./tokens/core.json": "./tokens/core.json",
+    "./tokens/dark.json": "./tokens/dark.json",
+    "./tokens/light.json": "./tokens/light.json"
   },
   "files": [
-    "dist"
+    "dist",
+    "tokens"
   ],
   "scripts": {
     "build": "tsc",
