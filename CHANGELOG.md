@@ -5,7 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.1.0] - 2025-01-XX
+## [0.2.0] - 2025-12-09
+
+### Added
+
+- Design Tokens in Figma Tokens (Tokens Studio) format as Single Source of Truth
+  - `tokens/core.json` - Typography, spacing, layout (shared)
+  - `tokens/dark.json` - Dark mode colors and effects
+  - `tokens/light.json` - Light mode colors and effects
+- Direct import support for design tokens (`@suwa-sh/mui-fui-theme/tokens/*.json`)
+- Documentation for LLM/Coding Agents
+  - `DESIGN_RULES.md` - Theme usage guide (English)
+  - `DESIGN_RULES_ja.md` - Theme usage guide (Japanese)
+
+## [0.1.0] - 2025-12-07
 
 ### Added
 
@@ -19,7 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `useScrollAnimation` - Scroll-triggered animations
 - Components:
   - Layout: `AppGrid`
-  - Atoms: `NavMenuItem`, `ProgressBar`, `ChartTooltip`, `ColorLegend`, `StatusIndicator`, `SectionHeader`
+  - Atoms: `NavMenuItem`, `ProgressBar`, `ColorLegend`, `StatusIndicator`, `SectionHeader`
   - Molecules: `DiamondNode`, `IconBox`
 - Storybook documentation with interactive demos
 - TypeScript type definitions
