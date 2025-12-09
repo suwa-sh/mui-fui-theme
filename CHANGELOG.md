@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2025-12-09
+
 ### Changed
 
 - Updated peer dependency to MUI v7 (`@mui/material ^7.0.0`)
