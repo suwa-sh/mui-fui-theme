@@ -3,6 +3,12 @@
 > このドキュメントは、LLMがFUI Themeを正しく利用するためのガイドです。
 > 利用者が「どう書けばテーマの設定値を活用できるか」に焦点を当てています。
 
+## 動作要件
+
+- React 18.0+ または 19.0+
+- MUI (Material UI) 7.0+
+- Emotion 11.0+
+
 ## 概要
 
 **FUI Theme** は J.A.R.V.I.S.スタイルのFuturistic User Interface（FUI/HUD）テーマです。

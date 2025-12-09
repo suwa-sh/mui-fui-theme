@@ -3,6 +3,12 @@
 > This document is a guide for LLMs to correctly use FUI Theme.
 > It focuses on "how to write code to utilize theme values."
 
+## Requirements
+
+- React 18.0+ or 19.0+
+- MUI (Material UI) 7.0+
+- Emotion 11.0+
+
 ## Overview
 
 **FUI Theme** is a J.A.R.V.I.S.-style Futuristic User Interface (FUI/HUD) theme.

@@ -1,10 +1,10 @@
-import Grid2, { Grid2Props } from '@mui/material/Grid2';
+import Grid, { GridProps } from '@mui/material/Grid';
 import { forwardRef } from 'react';
 
 /**
- * AppGrid - MUI Grid2のラッパーコンポーネント
+ * AppGrid - MUI Gridのラッパーコンポーネント
  *
- * Grid2をそのままラップし、将来的な拡張に備える。
+ * MUI v7のGrid（旧Grid2）をそのままラップし、将来的な拡張に備える。
  * - forwardRefでref転送
  * - 将来: spacing制限、デフォルト値設定など
  *
@@ -22,10 +22,10 @@ import { forwardRef } from 'react';
  *   <AppGrid size="grow">残り幅を埋める</AppGrid>
  * </AppGrid>
  */
-export type AppGridProps = Grid2Props;
+export type AppGridProps = GridProps;
 
 export const AppGrid = forwardRef<HTMLDivElement, AppGridProps>(
   function AppGrid(props, ref) {
-    return <Grid2 ref={ref} {...props} />;
+    return <Grid ref={ref} {...props} />;
   }
 );

@@ -11,6 +11,8 @@ export interface IconBoxProps {
   children?: React.ReactNode;
   /** Whether to show hover effects */
   hoverable?: boolean;
+  /** Whether to show the inner corner accent (L-shaped frame) */
+  showCornerAccent?: boolean;
   /** Additional sx props for the container */
   sx?: SxProps<Theme>;
   /** Class name for targeting in parent hover effects */
@@ -31,6 +33,7 @@ export const IconBox: React.FC<IconBoxProps> = ({
   size = 48,
   children,
   hoverable = true,
+  showCornerAccent = true,
   sx,
   className,
 }) => {
@@ -48,13 +51,15 @@ export const IconBox: React.FC<IconBoxProps> = ({
         flexShrink: 0,
         position: 'relative',
         transition: 'all 0.25s ease',
-        '&::before': {
-          content: '""',
-          position: 'absolute',
-          inset: 3,
-          border: '1px solid',
-          borderColor: alpha(color, 0.2),
-        },
+        ...(showCornerAccent && {
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            inset: 3,
+            border: '1px solid',
+            borderColor: alpha(color, 0.2),
+          },
+        }),
         ...(hoverable && {
           '&:hover': {
             boxShadow: `0 0 16px ${alpha(color, 0.5)}`,

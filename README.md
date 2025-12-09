@@ -16,12 +16,18 @@ Futuristic User Interface (FUI/HUD) theme for MUI and CodeMirror - J.A.R.V.I.S. 
 - CSS animations (scan lines, glow effects, etc.)
 - React hooks for text decode and scroll animations
 
+## Requirements
+
+- React 18.0+ or 19.0+
+- MUI (Material UI) 7.0+
+- Emotion 11.0+
+
 ## Installation
 
 ```bash
-npm install @suwa-sh/mui-fui-theme
+npm install @suwa-sh/mui-fui-theme @mui/material @emotion/react @emotion/styled
 # or
-pnpm add @suwa-sh/mui-fui-theme
+pnpm add @suwa-sh/mui-fui-theme @mui/material @emotion/react @emotion/styled
 ```
 
 ## Quick Start
