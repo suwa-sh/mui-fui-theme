@@ -80,8 +80,8 @@ stageColors.stage13 // #4CAF50 Green
 ### コンポーネントの使用
 
 ```tsx
+import { Grid } from '@mui/material';
 import {
-  AppGrid,
   DiamondNode,
   IconBox,
   ProgressBar,
@@ -91,10 +91,10 @@ import {
   ColorLegend,
 } from '@suwa-sh/mui-fui-theme';
 
-// グリッドレイアウト
-<AppGrid container spacing={2}>
-  <AppGrid size={{ xs: 12, md: 6 }}>Content</AppGrid>
-</AppGrid>
+// グリッドレイアウト（MUI標準のGridを使用）
+<Grid container spacing={2}>
+  <Grid size={{ xs: 12, md: 6 }}>Content</Grid>
+</Grid>
 
 // ダイヤモンドノード
 <DiamondNode color={stageColors.stage1} size={60}>
@@ -166,11 +166,6 @@ function AnimatedSection() {
 | `createFuiCodeMirrorTheme` | CodeMirror用テーマを生成 |
 
 ### コンポーネント
-
-#### Layout
-| コンポーネント | 説明 |
-|--------------|------|
-| `AppGrid` | MUI Grid2のラッパー（レスポンシブレイアウト） |
 
 #### Atoms
 | コンポーネント | 説明 |

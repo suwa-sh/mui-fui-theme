@@ -1,6 +1,3 @@
-// Layout
-export { AppGrid, type AppGridProps } from './layout';
-
 // Atoms
 export {
   NavMenuItem,

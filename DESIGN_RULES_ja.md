@@ -21,8 +21,8 @@
 ## テーマセットアップ
 
 ```tsx
-import { ThemeProvider, CssBaseline } from '@mui/material';
-import { createFuiTheme, AppGrid } from '@suwa-sh/mui-fui-theme';
+import { ThemeProvider, CssBaseline, Grid } from '@mui/material';
+import { createFuiTheme } from '@suwa-sh/mui-fui-theme';
 
 const theme = createFuiTheme('dark'); // または 'light'
 
@@ -30,33 +30,32 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />  {/* FUIスタイルのグリッド背景等が自動適用 */}
-      <AppGrid container>
+      <Grid container>
         <YourApp />
-      </AppGrid>
+      </Grid>
     </ThemeProvider>
   );
 }
 ```
 
-### AppGridによるグリッドシステム
+### MUI Grid によるレイアウト
 
-FUI Themeでは `AppGrid` をデフォルトのレイアウトシステムとして使用します。
-`AppGrid` は MUI Grid2 のラッパーで、レスポンシブレイアウトを簡単に構築できます。
+FUI ThemeではMUI標準の `Grid` コンポーネントをレイアウトに使用します。
 
 ```tsx
-import { AppGrid } from '@suwa-sh/mui-fui-theme';
+import { Grid } from '@mui/material';
 
 // 基本的なレスポンシブレイアウト
-<AppGrid container spacing={2}>
-  <AppGrid size={{ xs: 12, md: 6 }}>左カラム</AppGrid>
-  <AppGrid size={{ xs: 12, md: 6 }}>右カラム</AppGrid>
-</AppGrid>
+<Grid container spacing={2}>
+  <Grid size={{ xs: 12, md: 6 }}>左カラム</Grid>
+  <Grid size={{ xs: 12, md: 6 }}>右カラム</Grid>
+</Grid>
 
 // auto/growレイアウト
-<AppGrid container spacing={2}>
-  <AppGrid size="auto">固定幅</AppGrid>
-  <AppGrid size="grow">残り幅を埋める</AppGrid>
-</AppGrid>
+<Grid container spacing={2}>
+  <Grid size="auto">固定幅</Grid>
+  <Grid size="grow">残り幅を埋める</Grid>
+</Grid>
 ```
 
 ---
@@ -426,16 +425,16 @@ import { ColorLegend } from '@suwa-sh/mui-fui-theme';
 />
 ```
 
-### AppGrid - レスポンシブグリッド
+### Grid - レスポンシブグリッド
 
 ```tsx
-import { AppGrid } from '@suwa-sh/mui-fui-theme';
+import { Grid } from '@mui/material';
 
-<AppGrid>
-  <Box>アイテム1</Box>
-  <Box>アイテム2</Box>
-  <Box>アイテム3</Box>
-</AppGrid>
+<Grid container spacing={2}>
+  <Grid size={{ xs: 12, md: 4 }}>アイテム1</Grid>
+  <Grid size={{ xs: 12, md: 4 }}>アイテム2</Grid>
+  <Grid size={{ xs: 12, md: 4 }}>アイテム3</Grid>
+</Grid>
 ```
 
 ---

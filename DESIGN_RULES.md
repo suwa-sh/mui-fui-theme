@@ -21,8 +21,8 @@
 ## Theme Setup
 
 ```tsx
-import { ThemeProvider, CssBaseline } from '@mui/material';
-import { createFuiTheme, AppGrid } from '@suwa-sh/mui-fui-theme';
+import { ThemeProvider, CssBaseline, Grid } from '@mui/material';
+import { createFuiTheme } from '@suwa-sh/mui-fui-theme';
 
 const theme = createFuiTheme('dark'); // or 'light'
 
@@ -30,33 +30,32 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />  {/* FUI-style grid background is automatically applied */}
-      <AppGrid container>
+      <Grid container>
         <YourApp />
-      </AppGrid>
+      </Grid>
     </ThemeProvider>
   );
 }
 ```
 
-### Grid System with AppGrid
+### Layout with MUI Grid
 
-FUI Theme uses `AppGrid` as the default layout system.
-`AppGrid` is a wrapper for MUI Grid2, making it easy to build responsive layouts.
+FUI Theme uses the standard MUI `Grid` component for layouts.
 
 ```tsx
-import { AppGrid } from '@suwa-sh/mui-fui-theme';
+import { Grid } from '@mui/material';
 
 // Basic responsive layout
-<AppGrid container spacing={2}>
-  <AppGrid size={{ xs: 12, md: 6 }}>Left Column</AppGrid>
-  <AppGrid size={{ xs: 12, md: 6 }}>Right Column</AppGrid>
-</AppGrid>
+<Grid container spacing={2}>
+  <Grid size={{ xs: 12, md: 6 }}>Left Column</Grid>
+  <Grid size={{ xs: 12, md: 6 }}>Right Column</Grid>
+</Grid>
 
 // auto/grow layout
-<AppGrid container spacing={2}>
-  <AppGrid size="auto">Fixed Width</AppGrid>
-  <AppGrid size="grow">Fill Remaining</AppGrid>
-</AppGrid>
+<Grid container spacing={2}>
+  <Grid size="auto">Fixed Width</Grid>
+  <Grid size="grow">Fill Remaining</Grid>
+</Grid>
 ```
 
 ---
@@ -426,16 +425,16 @@ import { ColorLegend } from '@suwa-sh/mui-fui-theme';
 />
 ```
 
-### AppGrid - Responsive Grid
+### Grid - Responsive Grid
 
 ```tsx
-import { AppGrid } from '@suwa-sh/mui-fui-theme';
+import { Grid } from '@mui/material';
 
-<AppGrid>
-  <Box>Item 1</Box>
-  <Box>Item 2</Box>
-  <Box>Item 3</Box>
-</AppGrid>
+<Grid container spacing={2}>
+  <Grid size={{ xs: 12, md: 4 }}>Item 1</Grid>
+  <Grid size={{ xs: 12, md: 4 }}>Item 2</Grid>
+  <Grid size={{ xs: 12, md: 4 }}>Item 3</Grid>
+</Grid>
 ```
 
 ---

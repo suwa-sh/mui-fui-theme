@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Removed
+
+- `AppGrid` component - Use MUI's standard `Grid` component instead
+
 ## [0.3.0] - 2025-12-09
 
 ### Changed
@@ -39,7 +43,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `useTextDecode` - Matrix/JARVIS-style text scramble effect
   - `useScrollAnimation` - Scroll-triggered animations
 - Components:
-  - Layout: `AppGrid`
   - Atoms: `NavMenuItem`, `ProgressBar`, `ColorLegend`, `StatusIndicator`, `SectionHeader`
   - Molecules: `DiamondNode`, `IconBox`
 - Storybook documentation with interactive demos

@@ -50,10 +50,6 @@ function App() {
 
 ## Components
 
-### Layout
-
-- `AppGrid` - Responsive grid layout
-
 ### Atoms
 
 - `NavMenuItem` - Navigation menu item

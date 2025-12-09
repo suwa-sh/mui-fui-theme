@@ -75,9 +75,6 @@ export { createLogger, logger, showBanner, type LoggerOptions } from './logger';
 
 // Component exports
 export {
-  // Layout
-  AppGrid,
-  type AppGridProps,
   // Atoms
   NavMenuItem,
   ProgressBar,
