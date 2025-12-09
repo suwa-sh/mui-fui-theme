@@ -29,7 +29,9 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "lint": "eslint src/",
-    "test": "vitest run"
+    "test": "vitest run",
+    "preversion": "node scripts/check-changelog.js",
+    "version": "node scripts/update-changelog.js && git add CHANGELOG.md"
   },
   "peerDependencies": {
     "@emotion/react": "^11.0.0",
