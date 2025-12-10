@@ -1,7 +1,7 @@
 /**
  * @suwa-sh/mui-fui-theme
  *
- * Futuristic User Interface (FUI/HUD) theme for MUI and CodeMirror - J.A.R.V.I.S. style.
+ * Futuristic User Interface (FUI/HUD) theme for MUI - J.A.R.V.I.S. style.
  *
  * @see https://github.com/suwa-sh/mui-fui-theme
  * @license MIT
@@ -34,9 +34,6 @@ export {
 
 // Import augmentation to ensure types are available when using the package
 import './augmentation';
-
-// CodeMirror theme exports
-export { createFuiCodeMirrorTheme } from './codemirror';
 
 // Animation exports
 export {

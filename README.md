@@ -1,6 +1,6 @@
 # @suwa-sh/mui-fui-theme
 
-Futuristic User Interface (FUI/HUD) theme for MUI and CodeMirror - J.A.R.V.I.S. style.
+Futuristic User Interface (FUI/HUD) theme for MUI - J.A.R.V.I.S. style.
 
 [![npm version](https://badge.fury.io/js/@suwa-sh%2Fmui-fui-theme.svg)](https://www.npmjs.com/package/@suwa-sh/mui-fui-theme)
 [![Storybook](https://img.shields.io/badge/Storybook-ff4785?logo=storybook&logoColor=white)](https://suwa-sh.github.io/mui-fui-theme)
@@ -12,7 +12,6 @@ Futuristic User Interface (FUI/HUD) theme for MUI and CodeMirror - J.A.R.V.I.S. 
 
 - Dark and Light mode themes
 - FUI/HUD-style MUI components
-- CodeMirror editor theme
 - CSS animations (scan lines, glow effects, etc.)
 - React hooks for text decode and scroll animations
 

@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Removed
+
+- **BREAKING CHANGE:** Removed CodeMirror theme integration (`createFuiCodeMirrorTheme`)
+  - CodeEditor functionality is now available only in `@suwa-sh/mui-fui-theme-pro`
+  - Removed `@suwa-sh/mui-fui-theme/codemirror` export
+  - Removed CodeMirror-related peer dependencies (`@lezer/highlight`, `@uiw/codemirror-themes`)
+  - Removed CodeMirror-related dependencies (`@codemirror/*`, `@uiw/react-codemirror`)
+
 ## [0.3.1] - 2025-12-09
 
 ### Removed
