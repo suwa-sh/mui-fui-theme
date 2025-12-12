@@ -397,17 +397,50 @@ function AwakeningDemo() {
 ### NavMenuItem - Navigation Item
 
 ```tsx
-import { NavMenuItem } from '@suwa-sh/mui-fui-theme';
+import { NavMenuItem, getStageColors, getThemeColors, type ThemeMode } from '@suwa-sh/mui-fui-theme';
 import { Home } from '@mui/icons-material';
+import { useTheme } from '@mui/material';
 
+function MyNav() {
+  const theme = useTheme();
+  const mode = theme.palette.mode as ThemeMode;
+  const stageColors = getStageColors(mode);
+  const themeColors = getThemeColors(mode);
+
+  return (
+    <NavMenuItem
+      icon={<Home />}
+      label="Home"
+      selected={true}
+      color={stageColors.stage1}
+      themeColors={themeColors}
+      onClick={() => navigate('/')}
+    />
+  );
+}
+```
+
+**Awakening Mode**
+
+Setting the `awakening` prop makes the item gray when not selected/hovered, and transitions to accent color (amber/blue) on hover or selection.
+
+```tsx
 <NavMenuItem
   icon={<Home />}
   label="Home"
-  selected={true}
-  color="#FFB300"  // Custom color (optional)
+  awakening  // Enable gray → accent color transition
+  selected={pathname === '/'}
+  color={stageColors.stage1}
+  themeColors={themeColors}
   onClick={() => navigate('/')}
 />
 ```
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `awakening` | boolean | `false` | Enable awakening behavior |
+| `selected` | boolean | `false` | Selected state (always accent color) |
+| `color` | string | - | Accent color (used when awakening=false) |
 
 ### ProgressBar - Progress Bar
 

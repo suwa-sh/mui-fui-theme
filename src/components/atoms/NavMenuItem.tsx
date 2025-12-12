@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   Box,
   ListItem,
@@ -8,10 +9,12 @@ import {
   Chip,
   Tooltip,
   alpha,
+  useTheme,
   type SxProps,
   type Theme,
 } from '@mui/material';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import { getStageColors, type ThemeMode } from '../../theme';
 
 export interface NavMenuItemProps {
   /** Menu item label */
@@ -34,6 +37,13 @@ export interface NavMenuItemProps {
   collapsed?: boolean;
   /** Whether to show external link icon */
   external?: boolean;
+  /**
+   * Enable "Silence to Awakening" behavior.
+   * When true: gray when not hovered/selected, accent color on hover/selected.
+   * When false (default): always use the color prop (backward compatible).
+   * @default false
+   */
+  awakening?: boolean;
   /** Click handler */
   onClick?: () => void;
   /** Theme colors for text styling */
@@ -80,11 +90,23 @@ export const NavMenuItem: React.FC<NavMenuItemProps> = ({
   selected = false,
   collapsed = false,
   external,
+  awakening = false,
   onClick,
   themeColors,
   sx,
 }) => {
   const isExternal = external ?? !!url;
+  const theme = useTheme();
+  const mode = theme.palette.mode as ThemeMode;
+  const stageColors = getStageColors(mode);
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Awakening mode: use accent color only when hovered or selected
+  // Otherwise gray. When awakening=false, always use color prop.
+  const accentColor = stageColors.stage1; // amber (dark) / blue (light)
+  const grayColor = alpha(themeColors.text.primary, 0.4);
+  const showAccent = awakening ? (selected || isHovered) : true;
+  const effectiveColor = awakening ? (showAccent ? accentColor : grayColor) : color;
 
   // Indicator bar component (replaces MUI's default ::before pseudo-element)
   const IndicatorBar = (
@@ -96,9 +118,9 @@ export const NavMenuItem: React.FC<NavMenuItemProps> = ({
         transform: 'translateY(-50%)',
         width: 2,
         height: selected ? 20 : 0,
-        backgroundColor: color,
-        boxShadow: `0 0 ${selected ? 6 : 4}px ${color}`,
-        transition: 'height 0.2s ease',
+        backgroundColor: effectiveColor,
+        boxShadow: `0 0 ${selected ? 6 : 4}px ${effectiveColor}`,
+        transition: 'all 0.2s ease',
         '.MuiListItemButton-root:hover &': {
           height: 20,
         },
@@ -116,15 +138,20 @@ export const NavMenuItem: React.FC<NavMenuItemProps> = ({
         fontSize: '0.45rem',
         fontWeight: 500,
         letterSpacing: '0.1em',
-        backgroundColor: alpha(color, 0.15),
-        color: color,
-        border: `1px solid ${alpha(color, 0.3)}`,
+        backgroundColor: alpha(effectiveColor, 0.15),
+        color: effectiveColor,
+        border: `1px solid ${alpha(effectiveColor, 0.3)}`,
+        transition: 'all 0.2s ease',
         '& .MuiChip-label': { px: 0.5 },
       }}
     />
   );
 
   // Primary text with optional badge
+  // Awakening mode: text color follows effectiveColor on selected/hover
+  const textColor = awakening
+    ? (showAccent ? effectiveColor : themeColors.text.secondary)
+    : (selected ? color : themeColors.text.secondary);
   const PrimaryContent = (
     <Box component="span" sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
       <Typography
@@ -132,10 +159,11 @@ export const NavMenuItem: React.FC<NavMenuItemProps> = ({
         variant="body2"
         sx={{
           fontWeight: 500,
-          color: selected ? color : themeColors.text.secondary,
+          color: textColor,
           fontSize: '0.7rem',
           lineHeight: 1.3,
           letterSpacing: '0.03em',
+          transition: 'all 0.2s ease',
         }}
       >
         {label}
@@ -169,6 +197,8 @@ export const NavMenuItem: React.FC<NavMenuItemProps> = ({
     <ListItemButton
       selected={selected}
       onClick={onClick}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       sx={{
         mx: collapsed ? 0.5 : 1,
         my: 0.25,
@@ -177,20 +207,20 @@ export const NavMenuItem: React.FC<NavMenuItemProps> = ({
         minHeight: collapsed ? 44 : 48,
         borderRadius: 0,
         position: 'relative',
-        transition: 'all 0.15s ease',
+        transition: 'all 0.2s ease',
         border: '1px solid transparent',
         justifyContent: collapsed ? 'center' : 'flex-start',
         // Disable MUI theme's default indicator
         '&::before': { display: 'none' },
         '&:hover': {
           backgroundColor: 'transparent',
-          borderColor: alpha(color, 0.3),
+          borderColor: alpha(effectiveColor, 0.3),
         },
         '&.Mui-selected': {
           backgroundColor: 'transparent',
-          borderColor: alpha(color, 0.5),
+          borderColor: alpha(effectiveColor, 0.5),
           borderLeftWidth: 2,
-          borderLeftColor: color,
+          borderLeftColor: effectiveColor,
           '&:hover': { backgroundColor: 'transparent' },
         },
       }}
@@ -199,9 +229,10 @@ export const NavMenuItem: React.FC<NavMenuItemProps> = ({
 
       <ListItemIcon
         sx={{
-          color: `${color} !important`, // Override MUI theme's .Mui-selected style
+          color: `${effectiveColor} !important`, // Override MUI theme's .Mui-selected style
           minWidth: collapsed ? 'auto' : 32,
           mr: collapsed ? 0 : 1,
+          transition: 'all 0.2s ease',
           '& .MuiSvgIcon-root': { fontSize: 18, color: 'inherit' },
         }}
       >

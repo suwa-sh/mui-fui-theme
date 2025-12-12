@@ -218,3 +218,62 @@ const AllStatesDemo: React.FC = () => {
 export const AllStates: Story = {
   render: () => <AllStatesDemo />,
 };
+
+// Awakening mode - gray to accent on hover/selected
+const AwakeningDemo: React.FC = () => {
+  const theme = useTheme();
+  const mode = theme.palette.mode as ThemeMode;
+  const themeColors = getThemeColors(mode);
+  const stageColors = getStageColors(mode);
+
+  return (
+    <Box sx={{ width: 260, bgcolor: themeColors.background.default, p: 1 }}>
+      <List disablePadding>
+        <NavMenuItem
+          label="Default (Awakening)"
+          description="Hover to see color"
+          icon={<HomeIcon />}
+          color={stageColors.stage1}
+          path="/"
+          awakening
+          themeColors={themeColors}
+        />
+        <NavMenuItem
+          label="Selected (Awakening)"
+          description="Always accent color"
+          icon={<MicIcon />}
+          color={stageColors.stage2}
+          path="/selected"
+          selected
+          awakening
+          themeColors={themeColors}
+        />
+        <NavMenuItem
+          label="With Badge (Awakening)"
+          description="Has AI badge"
+          icon={<ChatBubbleOutlineIcon />}
+          color={stageColors.stage3}
+          url="https://example.com"
+          badge="AI"
+          external
+          awakening
+          themeColors={themeColors}
+        />
+        <NavMenuItem
+          label="External (Awakening)"
+          description="Opens in new tab"
+          icon={<SlideshowIcon />}
+          color={stageColors.stage4}
+          url="https://example.com"
+          external
+          awakening
+          themeColors={themeColors}
+        />
+      </List>
+    </Box>
+  );
+};
+
+export const Awakening: Story = {
+  render: () => <AwakeningDemo />,
+};

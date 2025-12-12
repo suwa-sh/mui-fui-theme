@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Awakening Pattern** - "Silence to Awakening" (静寂からの覚醒) hover effect system
   - `useAwakeningStyle` hook - Core hook for dynamic gray-to-amber transitions
   - `AwakeningCard` component - Ready-to-use Card wrapper with awakening behavior
+  - `NavMenuItem` component - Added `awakening` prop for gray-to-accent color transitions
   - Options: `awakening`, `isAlert`, `accentColor`, `glowMultiplier`
   - Full backward compatibility (awakening disabled by default)
 

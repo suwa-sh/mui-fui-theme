@@ -397,17 +397,50 @@ function AwakeningDemo() {
 ### NavMenuItem - ナビゲーションアイテム
 
 ```tsx
-import { NavMenuItem } from '@suwa-sh/mui-fui-theme';
+import { NavMenuItem, getStageColors, getThemeColors, type ThemeMode } from '@suwa-sh/mui-fui-theme';
 import { Home } from '@mui/icons-material';
+import { useTheme } from '@mui/material';
 
+function MyNav() {
+  const theme = useTheme();
+  const mode = theme.palette.mode as ThemeMode;
+  const stageColors = getStageColors(mode);
+  const themeColors = getThemeColors(mode);
+
+  return (
+    <NavMenuItem
+      icon={<Home />}
+      label="ホーム"
+      selected={true}
+      color={stageColors.stage1}
+      themeColors={themeColors}
+      onClick={() => navigate('/')}
+    />
+  );
+}
+```
+
+**覚醒モード（Awakening）**
+
+`awakening` prop を設定すると、非選択・非ホバー時はグレー、ホバーまたは選択時にアクセントカラー（amber/blue）に遷移します。
+
+```tsx
 <NavMenuItem
   icon={<Home />}
   label="ホーム"
-  selected={true}
-  color="#FFB300"  // カスタムカラー（省略可）
+  awakening  // グレー → アクセントカラーへの遷移を有効化
+  selected={pathname === '/'}
+  color={stageColors.stage1}
+  themeColors={themeColors}
   onClick={() => navigate('/')}
 />
 ```
+
+| オプション | 型 | デフォルト | 説明 |
+|-----------|------|---------|-------------|
+| `awakening` | boolean | `false` | 覚醒動作を有効化 |
+| `selected` | boolean | `false` | 選択状態（常にアクセントカラー） |
+| `color` | string | - | アクセントカラー（awakening=false時に使用） |
 
 ### ProgressBar - プログレスバー
 
