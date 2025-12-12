@@ -341,9 +341,11 @@ export const createFuiTheme = (mode: ThemeMode = 'dark'): Theme => {
           root: {
             backgroundImage: 'none',
             backgroundColor: alpha(colors.background.paper, isDark ? 0.8 : 0.95),
-            border: `1px solid ${colors.border}`,
+            // "Silence to Awakening" pattern: gray border by default
+            border: `1px solid ${alpha(colors.text.primary, 0.15)}`,
             borderRadius: 0,
             position: 'relative',
+            // L-shaped corner accent (gray by default)
             '&::before': {
               content: '""',
               position: 'absolute',
@@ -351,7 +353,7 @@ export const createFuiTheme = (mode: ThemeMode = 'dark'): Theme => {
               left: 0,
               width: '20px',
               height: '1px',
-              backgroundColor: isDark ? colors.primary : colors.text.accent,
+              backgroundColor: alpha(colors.text.primary, 0.3),
             },
             '&::after': {
               content: '""',
@@ -360,7 +362,7 @@ export const createFuiTheme = (mode: ThemeMode = 'dark'): Theme => {
               left: 0,
               width: '1px',
               height: '20px',
-              backgroundColor: isDark ? colors.primary : colors.text.accent,
+              backgroundColor: alpha(colors.text.primary, 0.3),
             },
           },
         },
@@ -370,10 +372,12 @@ export const createFuiTheme = (mode: ThemeMode = 'dark'): Theme => {
           root: {
             backgroundImage: 'none',
             backgroundColor: alpha(colors.background.paper, isDark ? 0.6 : 0.9),
-            border: `1px solid ${colors.border}`,
+            // "Silence to Awakening" pattern: gray border by default, amber on hover
+            border: `1px solid ${alpha(colors.text.primary, 0.15)}`,
             borderRadius: 0,
-            transition: 'all 0.2s ease',
+            transition: 'all 0.3s ease',
             position: 'relative',
+            // L-shaped corner accent (gray by default)
             '&::before': {
               content: '""',
               position: 'absolute',
@@ -381,8 +385,8 @@ export const createFuiTheme = (mode: ThemeMode = 'dark'): Theme => {
               left: 0,
               width: '30px',
               height: '1px',
-              backgroundColor: isDark ? colors.primary : colors.text.accent,
-              transition: 'width 0.3s ease',
+              backgroundColor: alpha(colors.text.primary, 0.3),
+              transition: 'all 0.3s ease',
             },
             '&::after': {
               content: '""',
@@ -391,17 +395,20 @@ export const createFuiTheme = (mode: ThemeMode = 'dark'): Theme => {
               left: 0,
               width: '1px',
               height: '30px',
-              backgroundColor: isDark ? colors.primary : colors.text.accent,
-              transition: 'height 0.3s ease',
+              backgroundColor: alpha(colors.text.primary, 0.3),
+              transition: 'all 0.3s ease',
             },
+            // Awakening on hover: amber border, amber L-shape, glow effect
             '&:hover': {
-              borderColor: colors.borderBright,
-              boxShadow: colors.glow.soft,
+              borderColor: colors.primary,
+              boxShadow: isDark ? colors.glow.soft : 'none',
               '&::before': {
                 width: '60px',
+                backgroundColor: colors.primary,
               },
               '&::after': {
                 height: '60px',
+                backgroundColor: colors.primary,
               },
             },
           },

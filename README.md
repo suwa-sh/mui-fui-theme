@@ -76,6 +76,7 @@ Available CSS keyframe animations:
 
 - `useTextDecode` - Matrix/JARVIS-style text scramble effect
 - `useScrollAnimation` - Scroll-triggered animations
+- `useAwakeningStyle` - "Silence to Awakening" hover effect for dashboard cards
 
 ## Design Tokens
 

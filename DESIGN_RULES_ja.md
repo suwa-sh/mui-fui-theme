@@ -335,6 +335,61 @@ function ScrollReveal() {
 }
 ```
 
+### useAwakeningStyle - 覚醒ホバー効果
+
+「静寂からの覚醒」パターン。ダッシュボードカード向けのホバー効果。
+
+```tsx
+import { useAwakeningStyle } from '@suwa-sh/mui-fui-theme';
+
+function AwakeningDemo() {
+  const {
+    cardSx,
+    setIsHovered,
+    titleColor,
+    iconColor,
+    primaryColor,
+    progressColor,
+  } = useAwakeningStyle({
+    awakening: true,   // グレー → 強調色への遷移を有効化
+    isAlert: false,    // アラート時は常に覚醒状態
+  });
+
+  return (
+    <Card
+      sx={cardSx}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <Typography sx={{ color: titleColor }}>SYSTEM STATUS</Typography>
+      <Icon sx={{ color: iconColor }} />
+    </Card>
+  );
+}
+```
+
+**オプション:**
+
+| オプション | 型 | デフォルト | 説明 |
+|-----------|------|---------|-------------|
+| `awakening` | boolean | `false` | 覚醒動作を有効化 |
+| `isAlert` | boolean | `false` | 常に覚醒状態にする |
+| `accentColor` | string | stage1 | カスタムアクセントカラー |
+| `glowMultiplier` | number | `1.0` | グロー強度の倍率 |
+
+**戻り値:**
+
+| プロパティ | 説明 |
+|----------|-------------|
+| `cardSx` | Card用sxプロパティ（border, shadow, corners） |
+| `setIsHovered` | ホバー状態のセッター |
+| `titleColor` | タイトルテキスト色 |
+| `iconColor` | アイコン色 |
+| `primaryColor` | 主要要素の色 |
+| `progressColor` | プログレスバーの色 |
+| `glowIntensity` | 現在のグロー強度 (0-1) |
+| `cornerSize` | コーナーマーカーサイズ ('30px' or '60px') |
+
 ---
 
 ## 提供コンポーネントの使い方

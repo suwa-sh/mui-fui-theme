@@ -9,3 +9,9 @@ export {
   type UseScrollAnimationOptions,
   type UseScrollAnimationResult,
 } from './useScrollAnimation';
+
+export {
+  useAwakeningStyle,
+  type AwakeningOptions,
+  type UseAwakeningStyleReturn,
+} from './useAwakeningStyle';

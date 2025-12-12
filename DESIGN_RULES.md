@@ -335,6 +335,61 @@ function ScrollReveal() {
 }
 ```
 
+### useAwakeningStyle - Awakening Hover Effect
+
+The "Silence to Awakening" pattern for dashboard cards.
+
+```tsx
+import { useAwakeningStyle } from '@suwa-sh/mui-fui-theme';
+
+function AwakeningDemo() {
+  const {
+    cardSx,
+    setIsHovered,
+    titleColor,
+    iconColor,
+    primaryColor,
+    progressColor,
+  } = useAwakeningStyle({
+    awakening: true,   // Enable gray → primary color transition
+    isAlert: false,    // Force awakened state for alerts
+  });
+
+  return (
+    <Card
+      sx={cardSx}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <Typography sx={{ color: titleColor }}>SYSTEM STATUS</Typography>
+      <Icon sx={{ color: iconColor }} />
+    </Card>
+  );
+}
+```
+
+**Options:**
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `awakening` | boolean | `false` | Enable awakening behavior |
+| `isAlert` | boolean | `false` | Force awakened state |
+| `accentColor` | string | stage1 | Custom accent color |
+| `glowMultiplier` | number | `1.0` | Glow intensity multiplier |
+
+**Returns:**
+
+| Property | Description |
+|----------|-------------|
+| `cardSx` | Card sx props (border, shadow, corners) |
+| `setIsHovered` | Hover state setter |
+| `titleColor` | Title text color |
+| `iconColor` | Icon color |
+| `primaryColor` | Primary element color |
+| `progressColor` | Progress bar color |
+| `glowIntensity` | Current glow intensity (0-1) |
+| `cornerSize` | Corner marker size ('30px' or '60px') |
+
 ---
 
 ## How to Use Provided Components

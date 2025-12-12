@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Awakening Pattern** - "Silence to Awakening" (静寂からの覚醒) hover effect system
+  - `useAwakeningStyle` hook - Core hook for dynamic gray-to-amber transitions
+  - `AwakeningCard` component - Ready-to-use Card wrapper with awakening behavior
+  - Options: `awakening`, `isAlert`, `accentColor`, `glowMultiplier`
+  - Full backward compatibility (awakening disabled by default)
+
+### Changed
+
+- **MuiCard/MuiPaper theme defaults** - Implement "Silence to Awakening" as default theme behavior
+  - Default border color changed from amber to gray (`alpha(text.primary, 0.15)`)
+  - Default L-shaped corner accent changed from amber to gray (`alpha(text.primary, 0.3)`)
+  - Hover state: amber border, amber L-corners, glow effect (awakening)
+  - `useAwakeningStyle({ awakening: false })` provides legacy amber styling for backward compatibility
+
+### Fixed
+
+- **MuiCard hover color in light mode** - Fixed hover border color showing blue (`text.accent`) instead of amber (`primary`) in both light and dark modes. Now consistently uses amber for the "Silence to Awakening" pattern.
+
 ### Removed
 
 - **BREAKING CHANGE:** Removed CodeMirror theme integration (`createFuiCodeMirrorTheme`)

@@ -61,10 +61,13 @@ export {
 export {
   useTextDecode,
   useScrollAnimation,
+  useAwakeningStyle,
   type UseTextDecodeOptions,
   type UseTextDecodeResult,
   type UseScrollAnimationOptions,
   type UseScrollAnimationResult,
+  type AwakeningOptions,
+  type UseAwakeningStyleReturn,
 } from './hooks';
 
 // Logger exports
@@ -88,6 +91,8 @@ export {
   // Molecules
   DiamondNode,
   IconBox,
+  AwakeningCard,
   type DiamondNodeProps,
   type IconBoxProps,
+  type AwakeningCardProps,
 } from './components';

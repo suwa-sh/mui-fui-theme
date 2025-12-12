@@ -18,6 +18,8 @@ export {
 export {
   DiamondNode,
   IconBox,
+  AwakeningCard,
   type DiamondNodeProps,
   type IconBoxProps,
+  type AwakeningCardProps,
 } from './molecules';
