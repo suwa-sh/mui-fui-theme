@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.1] - 2025-12-13
+
 ### Added
 
 - **`--fui-accent-color` CSS variable** - Customize Card border and L-corner accent color
