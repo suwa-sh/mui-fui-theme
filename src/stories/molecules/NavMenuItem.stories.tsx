@@ -9,7 +9,7 @@ import { NavMenuItem } from '../../components/atoms/NavMenuItem';
 import { getStageColors, getThemeColors, type ThemeMode } from '../../theme';
 
 const meta: Meta<typeof NavMenuItem> = {
-  title: 'Atoms/NavMenuItem',
+  title: 'Molecules/NavMenuItem',
   component: NavMenuItem,
   tags: ['autodocs'],
   parameters: {

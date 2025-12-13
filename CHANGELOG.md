@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **New component styles** - FUI styling for additional MUI components
+  - `MuiTabs` / `MuiTab` - Sharp edges, uppercase text, letterSpacing
+  - `MuiTableHead` / `MuiTableBody` / `MuiTableCell` - Monospace font, primary-tinted header
+  - `MuiAvatar` - Sharp edges with border
+  - `MuiAccordion` / `MuiAccordionSummary` / `MuiAccordionDetails` - FUI styling (L-corner disabled due to animation conflicts)
+  - `MuiSnackbarContent` - Sharp edges, monospace font, L-shaped corner accent
+  - `MuiToggleButton` / `MuiToggleButtonGroup` - FUI styling with primary accent on selection
+  - `MuiTimeClock` / `MuiClockPointer` / `MuiClockNumber` - TimePicker analog clock styling
+  - `MuiMultiSectionDigitalClock` - TimePicker digital clock styling
+- **New Storybook stories** - Navigation.stories.tsx (AppBar, Drawer, Menu, Divider), Surfaces.stories.tsx (Accordion, Snackbar, ToggleButton)
+- **TimePicker samples** - Added to DatePicker.stories.tsx
+
+### Changed
+
+- **MuiPaper L-shaped corner color** - Changed from gray (`text.primary`) to primary color for consistent FUI accent
+- **MuiPaper border color** - Changed from gray to subtle primary (`alpha(colors.primary, 0.15)`)
+- **Storybook reorganization** - foundations (Colors, Typography), atoms (MUI component styles), molecules (custom components + GlowEffects)
+
+### Fixed
+
+- **Snackbar text visibility** - Added explicit `color: colors.text.primary` to MuiSnackbarContent for readable text in dark mode
+
 ## [0.4.1] - 2025-12-13
 
 ### Added

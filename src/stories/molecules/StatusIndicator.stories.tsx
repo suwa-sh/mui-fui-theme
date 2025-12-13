@@ -4,7 +4,7 @@ import { Stack, Typography } from '@mui/material';
 import { StatusIndicator, type StatusType } from '../../components/atoms/StatusIndicator';
 
 const meta: Meta<typeof StatusIndicator> = {
-  title: 'Atoms/StatusIndicator',
+  title: 'Molecules/StatusIndicator',
   component: StatusIndicator,
   tags: ['autodocs'],
   parameters: {

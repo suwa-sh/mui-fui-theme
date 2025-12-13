@@ -23,7 +23,7 @@ import {
   Settings,
   Dashboard,
 } from '@mui/icons-material';
-import { getColors, getGlowEffects, type ThemeMode } from '../../theme';
+import { getColors, type ThemeMode } from '../../theme';
 
 const meta: Meta = {
   title: 'Pages/Layout',
@@ -136,26 +136,8 @@ export const Spacing: StoryObj = {
 
 // Tabs Story
 const TabsDemo: React.FC = () => {
-  const theme = useTheme();
-  const mode = theme.palette.mode as ThemeMode;
-  const colors = getColors(mode);
-  const glowEffects = getGlowEffects(mode);
   const [value, setValue] = React.useState(0);
   const [verticalValue, setVerticalValue] = React.useState(0);
-
-  const tabStyles = {
-    '& .MuiTab-root': {
-      borderRadius: 0,
-      letterSpacing: '0.05em',
-      textTransform: 'uppercase',
-      minHeight: 48,
-      fontWeight: 500,
-    },
-    '& .MuiTabs-indicator': {
-      backgroundColor: colors.primary,
-      boxShadow: glowEffects.soft,
-    },
-  };
 
   return (
     <Stack spacing={4}>
@@ -169,7 +151,6 @@ const TabsDemo: React.FC = () => {
           <Tabs
             value={value}
             onChange={(_, newValue) => setValue(newValue)}
-            sx={tabStyles}
           >
             <Tab label="Overview" />
             <Tab label="Analytics" />
@@ -192,7 +173,6 @@ const TabsDemo: React.FC = () => {
           <Tabs
             value={value}
             onChange={(_, newValue) => setValue(newValue)}
-            sx={tabStyles}
           >
             <Tab icon={<Dashboard />} label="Dashboard" />
             <Tab icon={<Settings />} label="Settings" />
@@ -213,7 +193,6 @@ const TabsDemo: React.FC = () => {
             sx={{
               borderRight: 1,
               borderColor: 'divider',
-              ...tabStyles,
             }}
           >
             <Tab label="Item One" />
@@ -350,11 +329,6 @@ const AvatarDemo: React.FC = () => {
   const mode = theme.palette.mode as ThemeMode;
   const colors = getColors(mode);
 
-  const avatarStyles = {
-    borderRadius: 0,
-    border: `1px solid ${colors.border}`,
-  };
-
   return (
     <Stack spacing={4}>
       <Typography variant="h5">Avatar</Typography>
@@ -368,20 +342,19 @@ const AvatarDemo: React.FC = () => {
             <Avatar
               alt="User"
               src="https://i.pravatar.cc/150?img=1"
-              sx={avatarStyles}
             />
             <Typography variant="caption" display="block" sx={{ mt: 1 }}>
               Image
             </Typography>
           </Box>
           <Box sx={{ textAlign: 'center' }}>
-            <Avatar sx={{ ...avatarStyles, bgcolor: colors.primary }}>JD</Avatar>
+            <Avatar sx={{ bgcolor: colors.primary }}>JD</Avatar>
             <Typography variant="caption" display="block" sx={{ mt: 1 }}>
               Letter
             </Typography>
           </Box>
           <Box sx={{ textAlign: 'center' }}>
-            <Avatar sx={{ ...avatarStyles, bgcolor: alpha(colors.primary, 0.2) }}>
+            <Avatar sx={{ bgcolor: alpha(colors.primary, 0.2) }}>
               <Person sx={{ color: colors.primary }} />
             </Avatar>
             <Typography variant="caption" display="block" sx={{ mt: 1 }}>
@@ -397,7 +370,7 @@ const AvatarDemo: React.FC = () => {
         </Typography>
         <Stack direction="row" spacing={2} alignItems="center">
           <Box sx={{ textAlign: 'center' }}>
-            <Avatar sx={{ ...avatarStyles, width: 24, height: 24, fontSize: '0.75rem' }}>
+            <Avatar sx={{ width: 24, height: 24, fontSize: '0.75rem' }}>
               S
             </Avatar>
             <Typography variant="caption" display="block" sx={{ mt: 1 }}>
@@ -405,19 +378,19 @@ const AvatarDemo: React.FC = () => {
             </Typography>
           </Box>
           <Box sx={{ textAlign: 'center' }}>
-            <Avatar sx={{ ...avatarStyles }}>M</Avatar>
+            <Avatar>M</Avatar>
             <Typography variant="caption" display="block" sx={{ mt: 1 }}>
               Medium
             </Typography>
           </Box>
           <Box sx={{ textAlign: 'center' }}>
-            <Avatar sx={{ ...avatarStyles, width: 56, height: 56 }}>L</Avatar>
+            <Avatar sx={{ width: 56, height: 56 }}>L</Avatar>
             <Typography variant="caption" display="block" sx={{ mt: 1 }}>
               Large
             </Typography>
           </Box>
           <Box sx={{ textAlign: 'center' }}>
-            <Avatar sx={{ ...avatarStyles, width: 80, height: 80 }}>XL</Avatar>
+            <Avatar sx={{ width: 80, height: 80 }}>XL</Avatar>
             <Typography variant="caption" display="block" sx={{ mt: 1 }}>
               Extra Large
             </Typography>
@@ -434,27 +407,22 @@ const AvatarDemo: React.FC = () => {
             <Avatar
               alt="User 1"
               src="https://i.pravatar.cc/150?img=1"
-              sx={avatarStyles}
             />
             <Avatar
               alt="User 2"
               src="https://i.pravatar.cc/150?img=2"
-              sx={avatarStyles}
             />
             <Avatar
               alt="User 3"
               src="https://i.pravatar.cc/150?img=3"
-              sx={avatarStyles}
             />
             <Avatar
               alt="User 4"
               src="https://i.pravatar.cc/150?img=4"
-              sx={avatarStyles}
             />
             <Avatar
               alt="User 5"
               src="https://i.pravatar.cc/150?img=5"
-              sx={avatarStyles}
             />
           </AvatarGroup>
           <Typography variant="caption" display="block" sx={{ mt: 1 }}>

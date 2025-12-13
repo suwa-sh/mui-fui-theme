@@ -341,11 +341,11 @@ export const createFuiTheme = (mode: ThemeMode = 'dark'): Theme => {
           root: {
             backgroundImage: 'none',
             backgroundColor: alpha(colors.background.paper, isDark ? 0.8 : 0.95),
-            // "Silence to Awakening" pattern: gray border by default
-            border: `1px solid ${alpha(colors.text.primary, 0.15)}`,
+            // "Silence to Awakening" pattern: subtle primary border by default
+            border: `1px solid ${alpha(colors.primary, 0.15)}`,
             borderRadius: 0,
             position: 'relative',
-            // L-shaped corner accent (gray by default)
+            // L-shaped corner accent (primary color)
             '&::before': {
               content: '""',
               position: 'absolute',
@@ -353,7 +353,7 @@ export const createFuiTheme = (mode: ThemeMode = 'dark'): Theme => {
               left: 0,
               width: '20px',
               height: '1px',
-              backgroundColor: alpha(colors.text.primary, 0.3),
+              backgroundColor: alpha(colors.primary, 0.5),
             },
             '&::after': {
               content: '""',
@@ -362,7 +362,7 @@ export const createFuiTheme = (mode: ThemeMode = 'dark'): Theme => {
               left: 0,
               width: '1px',
               height: '20px',
-              backgroundColor: alpha(colors.text.primary, 0.3),
+              backgroundColor: alpha(colors.primary, 0.5),
             },
           },
         },
@@ -705,6 +705,46 @@ export const createFuiTheme = (mode: ThemeMode = 'dark'): Theme => {
               linear-gradient(90deg, rgba(255, 179, 0, ${colors.gridOpacity}) 1px, transparent 1px)
             `,
             backgroundSize: '20px 20px',
+            transition: 'all 0.3s ease',
+            position: 'relative',
+            overflow: 'visible',
+            // L-shaped corner accent (top-left horizontal)
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '30px',
+              height: '1px',
+              backgroundColor: alpha(colors.primary, 0.3),
+              transition: 'all 0.3s ease',
+              zIndex: 1,
+            },
+            // L-shaped corner accent (top-left vertical)
+            '&::after': {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '1px',
+              height: '30px',
+              backgroundColor: alpha(colors.primary, 0.3),
+              transition: 'all 0.3s ease',
+              zIndex: 1,
+            },
+            // Awakening effect on focus-within
+            '&:focus-within': {
+              borderColor: colors.primary,
+              boxShadow: isDark ? colors.glow.soft : 'none',
+              '&::before': {
+                width: '60px',
+                backgroundColor: colors.primary,
+              },
+              '&::after': {
+                height: '60px',
+                backgroundColor: colors.primary,
+              },
+            },
           },
         },
       },
@@ -785,6 +825,180 @@ export const createFuiTheme = (mode: ThemeMode = 'dark'): Theme => {
           },
         },
       },
+      // DatePicker components (from @mui/x-date-pickers)
+      MuiPickersPopper: {
+        styleOverrides: {
+          paper: {
+            borderRadius: 0,
+            border: `1px solid ${colors.border}`,
+            backgroundColor: colors.background.elevated,
+            boxShadow: isDark ? colors.glow.soft : 'none',
+          },
+        },
+      },
+      MuiDateCalendar: {
+        styleOverrides: {
+          root: {
+            backgroundColor: 'transparent',
+          },
+        },
+      },
+      MuiPickersCalendarHeader: {
+        styleOverrides: {
+          root: {
+            fontFamily: '"JetBrains Mono", monospace',
+          },
+          label: {
+            fontFamily: '"JetBrains Mono", monospace',
+            textTransform: 'uppercase',
+            letterSpacing: '0.05em',
+          },
+        },
+      },
+      MuiDayCalendar: {
+        styleOverrides: {
+          weekDayLabel: {
+            fontFamily: '"JetBrains Mono", monospace',
+            fontSize: '0.75rem',
+            color: colors.text.secondary,
+          },
+        },
+      },
+      MuiPickersDay: {
+        styleOverrides: {
+          root: {
+            borderRadius: 0,
+            fontFamily: '"JetBrains Mono", monospace',
+            transition: 'all 0.15s ease',
+            color: colors.text.primary,
+            '&:hover': {
+              backgroundColor: alpha(colors.primary, 0.15),
+              color: colors.text.primary,
+            },
+            '&.Mui-selected': {
+              backgroundColor: colors.primary,
+              color: isDark ? '#000000' : '#ffffff',
+              fontWeight: 600,
+              '&:hover': {
+                backgroundColor: isDark ? alpha(colors.primary, 0.85) : colors.primary,
+                color: isDark ? '#000000' : '#ffffff',
+              },
+            },
+            '&.MuiPickersDay-today': {
+              border: `1px solid ${colors.primary}`,
+              backgroundColor: 'transparent',
+              color: colors.primary,
+              fontWeight: 600,
+              '&.Mui-selected': {
+                backgroundColor: colors.primary,
+                color: isDark ? '#000000' : '#ffffff',
+              },
+            },
+          },
+        },
+      },
+      MuiPickersYear: {
+        styleOverrides: {
+          yearButton: {
+            borderRadius: 0,
+            fontFamily: '"JetBrains Mono", monospace',
+            color: colors.text.primary,
+            '&:hover': {
+              backgroundColor: alpha(colors.primary, 0.15),
+            },
+            '&.Mui-selected': {
+              backgroundColor: colors.primary,
+              color: isDark ? '#000000' : '#ffffff',
+              fontWeight: 600,
+              '&:hover': {
+                backgroundColor: isDark ? alpha(colors.primary, 0.85) : colors.primary,
+              },
+            },
+          },
+        },
+      },
+      MuiPickersMonth: {
+        styleOverrides: {
+          monthButton: {
+            borderRadius: 0,
+            fontFamily: '"JetBrains Mono", monospace',
+            color: colors.text.primary,
+            '&:hover': {
+              backgroundColor: alpha(colors.primary, 0.15),
+            },
+            '&.Mui-selected': {
+              backgroundColor: colors.primary,
+              color: isDark ? '#000000' : '#ffffff',
+              fontWeight: 600,
+              '&:hover': {
+                backgroundColor: isDark ? alpha(colors.primary, 0.85) : colors.primary,
+              },
+            },
+          },
+        },
+      },
+      // TimePicker components
+      MuiTimeClock: {
+        styleOverrides: {
+          root: {
+            backgroundColor: 'transparent',
+          },
+        },
+      },
+      MuiClockPointer: {
+        styleOverrides: {
+          root: {
+            backgroundColor: colors.primary,
+          },
+          thumb: {
+            backgroundColor: colors.primary,
+            border: `2px solid ${colors.primary}`,
+          },
+        },
+      },
+      MuiClockNumber: {
+        styleOverrides: {
+          root: {
+            fontFamily: '"JetBrains Mono", monospace',
+            color: colors.text.primary,
+            '&.Mui-selected': {
+              backgroundColor: colors.primary,
+              color: isDark ? '#000000' : '#ffffff',
+            },
+          },
+        },
+      },
+      MuiMultiSectionDigitalClock: {
+        styleOverrides: {
+          root: {
+            borderRadius: 0,
+          },
+        },
+      },
+      MuiMultiSectionDigitalClockSection: {
+        styleOverrides: {
+          root: {
+            '&::after': {
+              display: 'none', // Hide scrollbar fade effect
+            },
+          },
+          item: {
+            fontFamily: '"JetBrains Mono", monospace',
+            borderRadius: 0,
+            '&.Mui-selected': {
+              backgroundColor: colors.primary,
+              color: isDark ? '#000000' : '#ffffff',
+              fontWeight: 600,
+              '&:hover': {
+                backgroundColor: isDark ? alpha(colors.primary, 0.85) : colors.primary,
+              },
+            },
+            '&:hover': {
+              backgroundColor: alpha(colors.primary, 0.15),
+            },
+          },
+        },
+      },
       MuiMenuItem: {
         styleOverrides: {
           root: {
@@ -800,6 +1014,186 @@ export const createFuiTheme = (mode: ThemeMode = 'dark'): Theme => {
                 backgroundColor: alpha(colors.primary, 0.2),
               },
             },
+          },
+        },
+      },
+      // Tabs components
+      MuiTabs: {
+        styleOverrides: {
+          root: {
+            minHeight: 48,
+          },
+          indicator: {
+            backgroundColor: isDark ? colors.primary : colors.text.accent,
+            boxShadow: isDark ? colors.glow.soft : 'none',
+          },
+        },
+      },
+      MuiTab: {
+        styleOverrides: {
+          root: {
+            borderRadius: 0,
+            letterSpacing: '0.05em',
+            textTransform: 'uppercase',
+            fontWeight: 500,
+            minHeight: 48,
+          },
+        },
+      },
+      // Table components
+      MuiTableHead: {
+        styleOverrides: {
+          root: {
+            '& .MuiTableCell-head': {
+              backgroundColor: alpha(colors.primary, 0.1),
+              color: isDark ? colors.primary : colors.text.accent,
+              fontWeight: 600,
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              fontSize: '0.75rem',
+              borderBottom: `1px solid ${colors.border}`,
+            },
+          },
+        },
+      },
+      MuiTableBody: {
+        styleOverrides: {
+          root: {
+            '& .MuiTableCell-body': {
+              borderBottom: `1px solid ${colors.border}`,
+              fontFamily: '"JetBrains Mono", monospace',
+              fontSize: '0.8125rem',
+            },
+            '& .MuiTableRow-root:hover': {
+              backgroundColor: alpha(colors.primary, 0.05),
+            },
+          },
+        },
+      },
+      MuiTableCell: {
+        styleOverrides: {
+          root: {
+            borderBottom: `1px solid ${colors.border}`,
+          },
+        },
+      },
+      // Avatar component
+      MuiAvatar: {
+        styleOverrides: {
+          root: {
+            borderRadius: 0,
+            border: `1px solid ${colors.border}`,
+          },
+        },
+      },
+      // Accordion components
+      MuiAccordion: {
+        styleOverrides: {
+          root: {
+            borderRadius: 0,
+            border: `1px solid ${alpha(colors.primary, 0.15)}`,
+            backgroundColor: colors.background.paper,
+            '&:before': {
+              display: 'none', // Hide default divider
+            },
+            // Disable L-shaped corner (conflicts with accordion animation)
+            '&::before, &::after': {
+              display: 'none',
+            },
+            '&.Mui-expanded': {
+              margin: 0,
+              borderColor: colors.primary,
+              boxShadow: isDark ? colors.glow.soft : 'none',
+            },
+          },
+        },
+      },
+      MuiAccordionSummary: {
+        styleOverrides: {
+          root: {
+            backgroundColor: alpha(colors.primary, 0.05),
+            minHeight: 48,
+            '&.Mui-expanded': {
+              minHeight: 48,
+              borderBottom: `1px solid ${colors.border}`,
+            },
+          },
+          content: {
+            fontWeight: 500,
+            letterSpacing: '0.05em',
+            textTransform: 'uppercase',
+          },
+        },
+      },
+      MuiAccordionDetails: {
+        styleOverrides: {
+          root: {
+            padding: '16px',
+          },
+        },
+      },
+      // Snackbar component
+      MuiSnackbarContent: {
+        styleOverrides: {
+          root: {
+            borderRadius: 0,
+            border: `1px solid ${alpha(colors.primary, 0.3)}`,
+            backgroundColor: colors.background.elevated,
+            color: colors.text.primary,
+            fontFamily: '"JetBrains Mono", monospace',
+            position: 'relative',
+            // L-shaped corner accent (primary color)
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '20px',
+              height: '1px',
+              backgroundColor: alpha(colors.primary, 0.7),
+            },
+            '&::after': {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '1px',
+              height: '20px',
+              backgroundColor: alpha(colors.primary, 0.7),
+            },
+            '& .MuiSnackbarContent-message': {
+              color: colors.text.primary,
+            },
+            '& .MuiSnackbarContent-action': {
+              color: colors.primary,
+            },
+          },
+        },
+      },
+      // ToggleButton components
+      MuiToggleButton: {
+        styleOverrides: {
+          root: {
+            borderRadius: 0,
+            border: `1px solid ${colors.border}`,
+            fontFamily: '"JetBrains Mono", monospace',
+            letterSpacing: '0.05em',
+            textTransform: 'uppercase',
+            '&.Mui-selected': {
+              backgroundColor: alpha(colors.primary, 0.2),
+              borderColor: colors.primary,
+              color: isDark ? colors.primary : colors.text.accent,
+              '&:hover': {
+                backgroundColor: alpha(colors.primary, 0.3),
+              },
+            },
+          },
+        },
+      },
+      MuiToggleButtonGroup: {
+        styleOverrides: {
+          root: {
+            gap: 0,
           },
         },
       },

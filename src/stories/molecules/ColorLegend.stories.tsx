@@ -5,7 +5,7 @@ import { ColorLegend, type ColorLegendItem } from '../../components/atoms/ColorL
 import { getStageColors, type ThemeMode } from '../../theme';
 
 const meta: Meta<typeof ColorLegend> = {
-  title: 'Atoms/ColorLegend',
+  title: 'Molecules/ColorLegend',
   component: ColorLegend,
   tags: ['autodocs'],
   parameters: {

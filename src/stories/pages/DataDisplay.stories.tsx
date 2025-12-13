@@ -17,7 +17,6 @@ import {
   Button,
   useTheme,
 } from '@mui/material';
-import { alpha } from '@mui/material/styles';
 import {
   Info,
   Delete,
@@ -77,26 +76,6 @@ const TableDemo: React.FC = () => {
     }
   };
 
-  const tableStyles = {
-    '& .MuiTableCell-head': {
-      backgroundColor: alpha(colors.primary, 0.1),
-      color: colors.primary,
-      fontWeight: 600,
-      letterSpacing: '0.1em',
-      textTransform: 'uppercase',
-      fontSize: '0.75rem',
-      borderBottom: `1px solid ${colors.border}`,
-    },
-    '& .MuiTableCell-body': {
-      borderBottom: `1px solid ${colors.border}`,
-      fontFamily: '"JetBrains Mono", monospace',
-      fontSize: '0.8125rem',
-    },
-    '& .MuiTableRow-root:hover': {
-      backgroundColor: alpha(colors.primary, 0.05),
-    },
-  };
-
   return (
     <Stack spacing={4}>
       <Typography variant="h5">Table</Typography>
@@ -106,7 +85,7 @@ const TableDemo: React.FC = () => {
           Basic Table
         </Typography>
         <TableContainer component={Paper}>
-          <Table sx={tableStyles}>
+          <Table>
             <TableHead>
               <TableRow>
                 <TableCell>ID</TableCell>
@@ -149,7 +128,7 @@ const TableDemo: React.FC = () => {
           Table with Actions
         </Typography>
         <TableContainer component={Paper}>
-          <Table sx={tableStyles}>
+          <Table>
             <TableHead>
               <TableRow>
                 <TableCell>Name</TableCell>

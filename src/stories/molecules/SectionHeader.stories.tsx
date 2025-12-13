@@ -8,7 +8,7 @@ import { SectionHeader } from '../../components/atoms/SectionHeader';
 import { getThemeColors, type ThemeMode } from '../../theme';
 
 const meta: Meta<typeof SectionHeader> = {
-  title: 'Atoms/SectionHeader',
+  title: 'Molecules/SectionHeader',
   component: SectionHeader,
   tags: ['autodocs'],
   parameters: {

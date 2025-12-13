@@ -5,7 +5,7 @@ import { PlayArrow, Settings, CloudUpload } from '@mui/icons-material';
 import { getGlowEffects, type ThemeMode } from '../../theme';
 
 const meta: Meta = {
-  title: 'Foundations/Glow Effects',
+  title: 'Molecules/Glow Effects',
   parameters: {
     layout: 'padded',
   },
