@@ -11,7 +11,7 @@
 
 ## Overview
 
-**FUI Theme** is a J.A.R.V.I.S.-style Futuristic User Interface (FUI/HUD) theme.
+**FUI Theme** is a Futuristic User Interface (FUI/HUD) theme.
 
 - **Dark Mode**: Black + Amber
 - **Light Mode**: Light Gray + Blue

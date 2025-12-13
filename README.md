@@ -124,8 +124,7 @@ Tokens follow the Figma Tokens format:
 ## Documentation
 
 - [Storybook](https://suwa-sh.github.io/mui-fui-theme/storybook) - Interactive component demos
-- [Design Rules](./DESIGN_RULES.md) - Document for LLM / Coding Agent
-  - [Design Rules 日本語版](./DESIGN_RULES_ja.md)
+- [agent docs](./agent_docs) - Document for LLM / Coding Agent
 
 ## Pro Version
 
