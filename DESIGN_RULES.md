@@ -623,6 +623,30 @@ Clear borders and background grid patterns.
 MuiPaper/MuiCard/MuiAlert have L-shaped decorations applied to the top-left corner.
 Do not apply border emphasis (thickness, etc.). If you want to emphasize with borders, use MUI's base components.
 
+**Customizing Card Accent Color with CSS Variable**
+
+Card borders and L-shaped corners can be customized using the `--fui-accent-color` CSS variable.
+By default, it uses `colors.primary` (amber in dark mode, blue in light mode).
+
+```tsx
+// Customize accent color for a single Card
+<Card sx={{ '--fui-accent-color': stageColors.stage2 }}>
+  Card with stage2 color
+</Card>
+
+// Default behavior (no customization needed)
+<Card>
+  Card with default primary color
+</Card>
+```
+
+| State | Border | L-corner |
+|-------|--------|----------|
+| Default | 30% transparent | 30% transparent |
+| Hover | 100% solid | 100% solid + extended |
+
+This allows consistent color theming where border and corner colors automatically match.
+
 ### 9. 4-Layer Background Structure
 
 Depth expression: default → paper → elevated → input.

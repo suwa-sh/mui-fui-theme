@@ -623,6 +623,30 @@ const stageColors = getStageColors(mode);
 MuiPaper/MuiCard/MuiAlertでは、左上にL字型装飾が適用される。
 ボーダーの強調（太さなど）は適用しない。ボーダーで強調したい場合は、MUIのコンポーネントを利用する。
 
+**CSS変数でCardのアクセントカラーをカスタマイズ**
+
+Cardのボーダーとコーナーは `--fui-accent-color` CSS変数でカスタマイズ可能。
+デフォルトは `colors.primary`（ダークモード: amber、ライトモード: blue）。
+
+```tsx
+// 個別のCardでアクセントカラーをカスタマイズ
+<Card sx={{ '--fui-accent-color': stageColors.stage2 }}>
+  stage2カラーのカード
+</Card>
+
+// デフォルト動作（カスタマイズ不要）
+<Card>
+  デフォルトのprimaryカラーのカード
+</Card>
+```
+
+| 状態 | ボーダー | L字コーナー |
+|------|---------|------------|
+| 初期 | 30%透過 | 30%透過 |
+| ホバー | 100%ソリッド | 100%ソリッド + 伸長 |
+
+これにより、ボーダーとコーナーの色が自動的に連動し、一貫したカラーテーマを実現できる。
+
 ### 9. 4層背景構造
 
 default → paper → elevated → input の深度表現。

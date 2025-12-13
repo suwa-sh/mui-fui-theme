@@ -372,12 +372,15 @@ export const createFuiTheme = (mode: ThemeMode = 'dark'): Theme => {
           root: {
             backgroundImage: 'none',
             backgroundColor: alpha(colors.background.paper, isDark ? 0.6 : 0.9),
-            // "Silence to Awakening" pattern: gray border by default, amber on hover
-            border: `1px solid ${alpha(colors.text.primary, 0.15)}`,
+            // CSS variable for accent color customization
+            // Usage: <Card sx={{ '--fui-accent-color': '#FFB300' }}>
+            '--fui-accent-color': colors.primary,
+            // "Silence to Awakening" pattern: 30% accent color by default, 100% on hover
+            border: '1px solid color-mix(in srgb, var(--fui-accent-color) 30%, transparent)',
             borderRadius: 0,
             transition: 'all 0.3s ease',
             position: 'relative',
-            // L-shaped corner accent (gray by default)
+            // L-shaped corner accent (30% accent color by default)
             '&::before': {
               content: '""',
               position: 'absolute',
@@ -385,7 +388,7 @@ export const createFuiTheme = (mode: ThemeMode = 'dark'): Theme => {
               left: 0,
               width: '30px',
               height: '1px',
-              backgroundColor: alpha(colors.text.primary, 0.3),
+              backgroundColor: 'color-mix(in srgb, var(--fui-accent-color) 30%, transparent)',
               transition: 'all 0.3s ease',
             },
             '&::after': {
@@ -395,20 +398,20 @@ export const createFuiTheme = (mode: ThemeMode = 'dark'): Theme => {
               left: 0,
               width: '1px',
               height: '30px',
-              backgroundColor: alpha(colors.text.primary, 0.3),
+              backgroundColor: 'color-mix(in srgb, var(--fui-accent-color) 30%, transparent)',
               transition: 'all 0.3s ease',
             },
-            // Awakening on hover: amber border, amber L-shape, glow effect
+            // Awakening on hover: 100% accent color border, L-shape, glow effect
             '&:hover': {
-              borderColor: colors.primary,
+              borderColor: 'var(--fui-accent-color)',
               boxShadow: isDark ? colors.glow.soft : 'none',
               '&::before': {
                 width: '60px',
-                backgroundColor: colors.primary,
+                backgroundColor: 'var(--fui-accent-color)',
               },
               '&::after': {
                 height: '60px',
-                backgroundColor: colors.primary,
+                backgroundColor: 'var(--fui-accent-color)',
               },
             },
           },

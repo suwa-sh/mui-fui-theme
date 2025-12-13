@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **`--fui-accent-color` CSS variable** - Customize Card border and L-corner accent color
+  - Set via `sx` prop: `sx={{ '--fui-accent-color': colors.stage.stage1 }}`
+  - Default value: `colors.primary` (amber in dark mode, blue in light mode)
+  - Automatic transparency: Initial state uses 30% opacity, hover state uses 100%
+  - Enables unified styling of border and L-corners with a single color specification
+
 ## [0.4.0] - 2025-12-12
 
 ### Added
