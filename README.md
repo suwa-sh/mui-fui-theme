@@ -1,6 +1,6 @@
 # @suwa-sh/mui-fui-theme
 
-Futuristic User Interface (FUI/HUD) theme for MUI - J.A.R.V.I.S. style.
+Futuristic User Interface (FUI/HUD) theme for MUI.
 
 [![npm version](https://badge.fury.io/js/@suwa-sh%2Fmui-fui-theme.svg)](https://www.npmjs.com/package/@suwa-sh/mui-fui-theme)
 [![Storybook](https://img.shields.io/badge/Storybook-ff4785?logo=storybook&logoColor=white)](https://suwa-sh.github.io/mui-fui-theme)
@@ -49,18 +49,29 @@ function App() {
 
 ## Components
 
-### Atoms
+### Atoms (MUI Themed)
 
-- `NavMenuItem` - Navigation menu item
+FUI-styled MUI components:
+
+- Button, IconButton
+- TextField, Select, Checkbox, Radio, Switch, Slider
+- Alert, Chip, Dialog, Skeleton
+- DatePicker (optional, requires `@mui/x-date-pickers`)
+- Navigation (Tabs, Breadcrumbs, ToggleButton)
+- Surfaces (Paper, Card, Accordion)
+
+### Molecules (Custom)
+
+Custom FUI components:
+
+- `NavMenuItem` - Navigation menu item with stage colors
 - `ProgressBar` - Animated progress bar
 - `ColorLegend` - Color legend display
 - `StatusIndicator` - Status indicator with colors
 - `SectionHeader` - Section header with decorations
-
-### Molecules
-
 - `DiamondNode` - Diamond-shaped node
 - `IconBox` - Icon container with FUI styling
+- `AwakeningCard` - Card with "Silence to Awakening" hover effect
 
 ## Animations
 
@@ -128,15 +139,7 @@ Tokens follow the Figma Tokens format:
 
 ## Pro Version
 
-Need more components? Check out **@suwa-sh/mui-fui-theme-pro** (coming soon) for:
-
-**Atoms:** `ChartTooltip`
-
-**Molecules:** `NavMenuGroup`, `SidebarLogo`, `MetricCard`, `FuiTable`, `HeatmapLegend`, `HUDOverlay`, `VisualPanel`, `DiagonalDivider`, `CodeEditor`, `DecodedTitle`, `FileUpload`, `Progress`
-
-**Organisms:** `Sidebar`, `FuiAreaChart`, `FuiBarChart`, `FuiRadarChart`
-
-<!-- Pro documentation link will be added when available -->
+Need more components? Check out [mui-fui-theme-pro](https://suwa-sh.github.io/mui-fui-theme-pro-site/).
 
 ## License
 
